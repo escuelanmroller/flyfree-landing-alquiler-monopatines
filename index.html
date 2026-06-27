@@ -1420,6 +1420,170 @@
       .time-slot-group { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* ─── BOOKING FORM STYLES ─── */
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    .booking-form h4 {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: #0C0C0C;
+      margin-bottom: 0.5em;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4em;
+    }
+
+    .form-group label {
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #0C0C0C;
+    }
+
+    .form-group input {
+      padding: 0.8em;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.95em;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #F5C800;
+      box-shadow: 0 0 0 2px rgba(245, 200, 0, 0.1);
+    }
+
+    .checkbox-group {
+      gap: 0.6em;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6em;
+      font-size: 0.95em;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: #F5C800;
+    }
+
+    .link-btn {
+      background: none;
+      border: none;
+      color: #F5C800;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+      font-size: inherit;
+      font-weight: 600;
+    }
+
+    .link-btn:hover {
+      color: #d4a800;
+    }
+
+    /* ─── MODAL STYLES ─── */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: #666;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: #0C0C0C;
+    }
+
+    .terms-content {
+      font-size: 0.95em;
+      line-height: 1.6;
+      color: #383838;
+    }
+
+    .terms-content h3 {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: #0C0C0C;
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+    }
+
+    .terms-content h3:first-child {
+      margin-top: 0;
+    }
+
+    .terms-content p {
+      margin-bottom: 0.8em;
+    }
+
+    .terms-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.8em 0;
+    }
+
+    .terms-list li {
+      margin-bottom: 0.8em;
+      padding-left: 0;
+    }
+
+    /* ─── SUCCESS MESSAGE ─── */
+    #booking-success {
+      padding: 1.5em;
+      background-color: rgba(76, 175, 80, 0.05);
+      border-radius: 8px;
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -2162,39 +2326,113 @@
           <div class="time-slot-group" id="time-slots"></div>
         </div>
         <div class="booking-summary" id="booking-summary" style="display:none;">
-          <h4>Resumen de reserva</h4>
-          <div class="summary-item">
-            <span>Fecha</span>
-            <span id="summary-date">-</span>
-          </div>
-          <div class="summary-item">
-            <span>Horario</span>
-            <span id="summary-time">-</span>
-          </div>
-          <div class="summary-item">
-            <span>Modelo</span>
-            <span id="summary-model">Pro</span>
-          </div>
-          <div class="summary-item">
-            <span>Duración</span>
-            <span id="summary-duration">-</span>
-          </div>
-          <div class="summary-divider"></div>
-          <div class="summary-total">
-            <span>Total</span>
-            <span id="summary-price">$65.000</span>
-          </div>
-          <a href="#" id="confirm-booking" class="btn btn-primary" target="_blank" rel="noopener">
-            Confirmar por WhatsApp →
-          </a>
-          <div class="booking-message">
-            Te enviaremos confirmación y detalles de retiro al instante
-          </div>
+          <form id="booking-form" class="booking-form">
+            <h4>Resumen de reserva</h4>
+            <div class="summary-item">
+              <span>Fecha</span>
+              <span id="summary-date">-</span>
+            </div>
+            <div class="summary-item">
+              <span>Horario</span>
+              <span id="summary-time">-</span>
+            </div>
+            <div class="summary-item">
+              <span>Modelo</span>
+              <span id="summary-model">Pro</span>
+              <small style="display:block; font-size:0.75em; color:#666; margin-top:0.25em;">Puedes cambiar en el showroom</small>
+            </div>
+            <div class="summary-item">
+              <span>Duración</span>
+              <span id="summary-duration">-</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-total">
+              <span>Total</span>
+              <span id="summary-price">$65.000</span>
+            </div>
+
+            <!-- Campos del formulario -->
+            <div class="form-group">
+              <label for="booking-nombre">Nombre *</label>
+              <input type="text" id="booking-nombre" name="nombre" required placeholder="Tu nombre">
+            </div>
+
+            <div class="form-group">
+              <label for="booking-email">Email *</label>
+              <input type="email" id="booking-email" name="email" required placeholder="tu@email.com">
+            </div>
+
+            <div class="form-group">
+              <label for="booking-telefono">Teléfono *</label>
+              <input type="tel" id="booking-telefono" name="telefono" required placeholder="+54 9 11 55..." pattern="\+?[0-9\s\-\(\)]{8,}">
+            </div>
+
+            <div class="form-group">
+              <label for="booking-cantidad">Cantidad *</label>
+              <input type="number" id="booking-cantidad" name="cantidad" min="1" value="1" required>
+            </div>
+
+            <!-- Checkbox Términos -->
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="booking-accept-terms" name="accept_terms" required>
+                <span>Acepto términos y condiciones</span>
+                <button type="button" class="link-btn" id="show-terms-btn">Ver detalles</button>
+              </label>
+            </div>
+
+            <!-- Botón enviar -->
+            <button type="submit" class="btn btn-primary" style="width:100%; margin-top:1em;">
+              CONFIRMAR RESERVA →
+            </button>
+
+            <!-- Mensaje de éxito (oculto) -->
+            <div id="booking-success" style="display:none; margin-top:1.5em; text-align:center;">
+              <p style="font-size:18px; font-weight:bold; color:#4CAF50;">✅ ¡Reserva confirmada!</p>
+              <p style="font-size:14px; color:#666;">Recibirás un WhatsApp en 1 minuto</p>
+            </div>
+
+            <div class="booking-message">
+              Te enviaremos confirmación y detalles de retiro al instante
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════ MODAL TÉRMINOS ═══════════════════════════════ -->
+<div id="terms-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <button class="modal-close" type="button" id="close-terms">&times;</button>
+    <h2>Términos y Condiciones de Alquiler</h2>
+    <div class="terms-content">
+      <h3>PRE-ACEPTACIÓN DIGITAL</h3>
+      <p><strong>Esta es una PRE-ACEPTACIÓN de términos y condiciones.</strong></p>
+      <p>El contrato legal será <strong>firmado digitalmente en el SHOWROOM</strong> antes de retirar tu monopatín.</p>
+
+      <h3>Puntos principales:</h3>
+      <ul class="terms-list">
+        <li><strong>✓ Edad mínima:</strong> 18 años con documento válido</li>
+        <li><strong>✓ Depósito:</strong> Se requiere seña (monto según modelo — se descuenta del total)</li>
+        <li><strong>✓ Responsabilidad:</strong> Eres responsable por daños al equipo durante el alquiler</li>
+        <li><strong>✓ Duración:</strong> Alquiler desde 1 hora hasta día completo</li>
+        <li><strong>✓ Política de cancelación:</strong> 24h antes sin penalidad</li>
+        <li><strong>✓ Documentación:</strong> Cédula, pasaporte o documento de identidad requerido en el showroom</li>
+        <li><strong>✓ Soporte:</strong> Tenés asistencia 24/7 por WhatsApp durante tu alquiler</li>
+        <li><strong>✓ Equipo de seguridad:</strong> Incluye casco y protecciones en todos los alquileres</li>
+      </ul>
+
+      <h3>¿Preguntas?</h3>
+      <p>Contactanos por WhatsApp antes de la reserva si querés aclarar algo: <strong>wa.me/5491151097151</strong></p>
+
+      <button type="button" class="btn btn-primary" id="accept-terms-modal" style="width:100%; margin-top:1.5em;">
+        Entendido, acepto →
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════ TESTIMONIOS ═══════════════════════════════ -->
 <section id="testimonios">
@@ -2852,20 +3090,101 @@
     document.getElementById('summary-duration').textContent = selectedDuration;
     document.getElementById('summary-price').textContent = `$${price.toLocaleString('es-AR')}`;
     document.getElementById('booking-summary').style.display = 'block';
-
-    // Botón confirma → abre popup de Calendly con fecha y hora pre-seleccionadas
-    const confirmBtn = document.getElementById('confirm-booking');
-    confirmBtn.href = '#';
-    confirmBtn.onclick = function(e) {
-      e.preventDefault();
-      // Calendly popup con fecha+hora preseleccionadas
-      Calendly.initPopupWidget({
-        url: `${calendlySchedulingUrl}?month=${isoDate.substring(0,7)}&date=${isoDate}`,
-        prefill: {},
-        utm: { utmSource: 'landing', utmMedium: 'booking_widget' }
-      });
-    };
   }
+
+  // ═══════════════════════════════ BOOKING FORM LOGIC ═══════════════════════════════
+
+  // Modal Términos
+  const termsModal = document.getElementById('terms-modal');
+  const showTermsBtn = document.getElementById('show-terms-btn');
+  const closeTermsBtn = document.getElementById('close-terms');
+  const acceptTermsModalBtn = document.getElementById('accept-terms-modal');
+
+  showTermsBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    termsModal.classList.add('show');
+  });
+
+  closeTermsBtn.addEventListener('click', () => {
+    termsModal.classList.remove('show');
+  });
+
+  acceptTermsModalBtn.addEventListener('click', () => {
+    document.getElementById('booking-accept-terms').checked = true;
+    termsModal.classList.remove('show');
+  });
+
+  termsModal.addEventListener('click', (e) => {
+    if (e.target === termsModal) {
+      termsModal.classList.remove('show');
+    }
+  });
+
+  // Formulario de Reserva
+  const bookingForm = document.getElementById('booking-form');
+
+  bookingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nombre = document.getElementById('booking-nombre').value.trim();
+    const email = document.getElementById('booking-email').value.trim();
+    const telefono = document.getElementById('booking-telefono').value.trim();
+    const cantidad = document.getElementById('booking-cantidad').value;
+    const acceptTerms = document.getElementById('booking-accept-terms').checked;
+
+    if (!acceptTerms) {
+      alert('Debes aceptar los términos y condiciones para continuar');
+      return;
+    }
+
+    const isoDate = selectedDate.toISOString().split('T')[0];
+
+    const payload = {
+      tipo: 'monopatines',
+      fecha: isoDate,
+      horario: selectedTime,
+      modelo: selectedModel,
+      cantidad: parseInt(cantidad),
+      nombre,
+      email,
+      telefono,
+      acepto_terminos: true
+    };
+
+    // Deshabilitar botón while processing
+    const submitBtn = bookingForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+
+    try {
+      const res = await fetch('/api/kommo-booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        // Mostrar mensaje de éxito
+        bookingForm.style.display = 'none';
+        document.getElementById('booking-success').style.display = 'block';
+
+        // Recargar después de 5s
+        setTimeout(() => window.location.reload(), 5000);
+      } else {
+        alert('Error: ' + (data.error || 'No se pudo procesar la reserva'));
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      alert('Error al procesar la reserva: ' + err.message);
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
 </script>
 
 </body>
