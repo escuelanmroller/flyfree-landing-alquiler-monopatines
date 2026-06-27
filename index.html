@@ -24,6 +24,8 @@
   <!-- Flatpickr Calendar CSS -->
   <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css" />
   <script src="https://unpkg.com/flatpickr"></script>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 
   <style>
 
@@ -2755,29 +2757,35 @@
     map.fitBounds([[-34.62, -58.4], [-34.55, -58.3]], {padding: [50, 50]});
   }
 
-  // ═══ CALENDARIO & BOOKING ═══
+  // ═══ CALENDARIO & BOOKING — Integración Calendly ═══
   let selectedDate = null;
   let selectedTime = null;
   let selectedModel = 'Pro';
   let selectedDuration = '2h';
+  let AVAILABILITY = {};
+  let calendlySchedulingUrl = 'https://calendly.com/flyfreeurban/alquiler-venta';
+  let fpInstance = null;
 
-  // Availability data (hardcoded for demo, replace with API in future)
-  const AVAILABILITY = {
-    '2026-06-27': { '10:00': true, '14:00': true, '18:00': false },
-    '2026-06-28': { '10:00': true, '14:00': false, '18:00': true },
-    '2026-06-29': { '10:00': false, '14:00': true, '18:00': true },
-    '2026-06-30': { '10:00': true, '14:00': true, '18:00': true },
-    '2026-07-01': { '10:00': true, '14:00': true, '18:00': false },
-    '2026-07-02': { '10:00': false, '14:00': true, '18:00': true },
-    '2026-07-03': { '10:00': true, '14:00': true, '18:00': true },
-  };
-
-  const TIME_SLOTS = ['10:00', '14:00', '18:00'];
   const PRICES = { Basic: 25000, Pro: 65000 };
 
-  const calendarElement = document.getElementById('calendar');
-  if (calendarElement) {
-    flatpickr(calendarElement, {
+  // Cargar disponibilidad desde la API (Calendly en tiempo real)
+  async function loadAvailability() {
+    const calendarEl = document.getElementById('calendar');
+    if (!calendarEl) return;
+
+    try {
+      const res = await fetch('/api/availability');
+      if (res.ok) {
+        const data = await res.json();
+        AVAILABILITY = data.availability || {};
+        if (data.schedulingUrl) calendlySchedulingUrl = data.schedulingUrl;
+      }
+    } catch (e) {
+      console.warn('No se pudo cargar disponibilidad de Calendly, usando modo offline');
+    }
+
+    // Inicializar calendario con los datos cargados
+    fpInstance = flatpickr(calendarEl, {
       inline: true,
       mode: 'single',
       minDate: 'today',
@@ -2785,7 +2793,7 @@
       disable: [
         function(date) {
           const dateStr = date.toISOString().split('T')[0];
-          return !AVAILABILITY[dateStr];
+          return !AVAILABILITY[dateStr] || Object.keys(AVAILABILITY[dateStr]).length === 0;
         }
       ],
       onChange: function(selectedDates) {
@@ -2797,28 +2805,30 @@
     });
   }
 
+  loadAvailability();
+
   function showTimeSlots(date) {
     const dateStr = date.toISOString().split('T')[0];
     const availableSlots = AVAILABILITY[dateStr] || {};
+    const allTimes = Object.keys(availableSlots).sort();
 
     const timeSlotsContainer = document.getElementById('time-slots-container');
     const slotsHtml = document.getElementById('time-slots');
-
     slotsHtml.innerHTML = '';
 
-    TIME_SLOTS.forEach(time => {
-      const isAvailable = availableSlots[time];
-      const btn = document.createElement('button');
-      btn.className = `time-slot ${isAvailable ? '' : 'disabled'}`;
-      btn.textContent = time;
-      btn.disabled = !isAvailable;
-
-      if (isAvailable) {
-        btn.addEventListener('click', () => selectTimeSlot(btn, time));
-      }
-
-      slotsHtml.appendChild(btn);
-    });
+    if (allTimes.length === 0) {
+      slotsHtml.innerHTML = '<p style="color:var(--text-secondary);font-size:0.85rem;">Sin horarios disponibles para este día</p>';
+    } else {
+      allTimes.forEach(time => {
+        const isAvailable = availableSlots[time];
+        const btn = document.createElement('button');
+        btn.className = `time-slot ${isAvailable ? '' : 'disabled'}`;
+        btn.textContent = time;
+        btn.disabled = !isAvailable;
+        if (isAvailable) btn.addEventListener('click', () => selectTimeSlot(btn, time));
+        slotsHtml.appendChild(btn);
+      });
+    }
 
     timeSlotsContainer.style.display = 'block';
   }
@@ -2831,23 +2841,30 @@
   }
 
   function updateBookingSummary() {
-    if (selectedDate && selectedTime) {
-      const dateStr = selectedDate.toLocaleDateString('es-AR', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'});
-      const price = PRICES[selectedModel];
+    if (!selectedDate || !selectedTime) return;
 
-      document.getElementById('summary-date').textContent = dateStr;
-      document.getElementById('summary-time').textContent = selectedTime;
-      document.getElementById('summary-duration').textContent = selectedDuration;
-      document.getElementById('summary-price').textContent = `$${price.toLocaleString('es-AR')}`;
+    const dateStr = selectedDate.toLocaleDateString('es-AR', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'});
+    const price = PRICES[selectedModel];
+    const isoDate = selectedDate.toISOString().split('T')[0];
 
-      const bookingSummary = document.getElementById('booking-summary');
-      bookingSummary.style.display = 'block';
+    document.getElementById('summary-date').textContent = dateStr;
+    document.getElementById('summary-time').textContent = selectedTime;
+    document.getElementById('summary-duration').textContent = selectedDuration;
+    document.getElementById('summary-price').textContent = `$${price.toLocaleString('es-AR')}`;
+    document.getElementById('booking-summary').style.display = 'block';
 
-      // Build WhatsApp message
-      const message = `Hola! Quiero reservar para el ${dateStr} a las ${selectedTime}. Modelo ${selectedModel}, ${selectedDuration} de duración. Total: $${price}`;
-      const whatsappUrl = `https://api.whatsapp.com/send?phone=5491151097151&text=${encodeURIComponent(message)}`;
-      document.getElementById('confirm-booking').href = whatsappUrl;
-    }
+    // Botón confirma → abre popup de Calendly con fecha y hora pre-seleccionadas
+    const confirmBtn = document.getElementById('confirm-booking');
+    confirmBtn.href = '#';
+    confirmBtn.onclick = function(e) {
+      e.preventDefault();
+      // Calendly popup con fecha+hora preseleccionadas
+      Calendly.initPopupWidget({
+        url: `${calendlySchedulingUrl}?month=${isoDate.substring(0,7)}&date=${isoDate}`,
+        prefill: {},
+        utm: { utmSource: 'landing', utmMedium: 'booking_widget' }
+      });
+    };
   }
 </script>
 
