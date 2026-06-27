@@ -34,7 +34,11 @@ export default async function handler(req, res) {
     const leadRes = await fetch(`${base}/leads`, {
       method: 'POST',
       headers,
-      body: JSON.stringify([{ name: leadName }])
+      body: JSON.stringify([{
+      name: leadName,
+      pipeline_id: 8722923,
+      status_id: 68948151
+    }])
     });
 
     const leadData = await leadRes.json();
