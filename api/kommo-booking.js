@@ -34,13 +34,16 @@ export default async function handler(req, res) {
     const leadRes = await fetch(`${base}/leads`, {
       method: 'POST',
       headers,
-      body: JSON.stringify([{ name: leadName, price: 0 }])
+      body: JSON.stringify([{ name: leadName }])
     });
 
     const leadData = await leadRes.json();
     if (!leadRes.ok) {
-      console.error('Kommo lead error:', JSON.stringify(leadData));
-      return res.status(leadRes.status).json({ error: 'Error al crear lead en Kommo', details: leadData });
+      const valErrors = leadData?.['validation-errors']?.[0]?.errors;
+      console.error('Kommo lead error status:', leadRes.status);
+      console.error('Kommo validation errors:', JSON.stringify(valErrors));
+      console.error('Kommo full response:', JSON.stringify(leadData));
+      return res.status(leadRes.status).json({ error: 'Error al crear lead en Kommo', details: leadData, validation: valErrors });
     }
 
     const leadId = leadData._embedded?.leads?.[0]?.id;
