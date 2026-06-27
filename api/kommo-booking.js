@@ -29,64 +29,50 @@ export default async function handler(req, res) {
   };
 
   try {
-    // Kommo v4 requires array body for lead creation
     const leadName = `${nombre} — ${tipo || 'monopatines'} ${fecha} ${horario}`;
-    const leadRes = await fetch(`${base}/leads`, {
+    const noteText = `RESERVA AUTOMÁTICA:\nFecha: ${fecha}\nHorario: ${horario}\nModelo: ${modelo}\nCantidad: ${cantidad}\nTipo: ${tipo}\nEmail: ${email}\nTeléfono: ${telefono}\nAceptó términos: Sí`;
+
+    // /leads/complex crea lead + contacto vinculado + nota en una sola llamada
+    const complexRes = await fetch(`${base}/leads/complex`, {
       method: 'POST',
       headers,
       body: JSON.stringify([{
-      name: leadName,
-      pipeline_id: 8722923,
-      status_id: 68948151
-    }])
+        name: leadName,
+        pipeline_id: 8722923,
+        status_id: 68948151,
+        _embedded: {
+          contacts: [{
+            name: nombre,
+            custom_fields_values: [
+              { field_code: 'EMAIL', values: [{ value: email, enum_code: 'WORK' }] },
+              { field_code: 'PHONE', values: [{ value: telefono, enum_code: 'WORK' }] }
+            ]
+          }],
+          notes: [{
+            note_type: 'common',
+            params: { text: noteText }
+          }]
+        }
+      }])
     });
 
-    const leadData = await leadRes.json();
-    if (!leadRes.ok) {
-      const valErrors = leadData?.['validation-errors']?.[0]?.errors;
-      console.error('Kommo lead error status:', leadRes.status);
-      console.error('Kommo validation errors:', JSON.stringify(valErrors));
-      console.error('Kommo full response:', JSON.stringify(leadData));
-      return res.status(leadRes.status).json({ error: 'Error al crear lead en Kommo', details: leadData, validation: valErrors });
+    const complexData = await complexRes.json();
+
+    if (!complexRes.ok) {
+      const valErrors = complexData?.['validation-errors']?.[0]?.errors;
+      console.error('Kommo complex error status:', complexRes.status);
+      console.error('Kommo complex validation errors:', JSON.stringify(valErrors));
+      console.error('Kommo complex full response:', JSON.stringify(complexData));
+      return res.status(complexRes.status).json({
+        error: 'Error al crear lead en Kommo',
+        details: complexData,
+        validation: valErrors
+      });
     }
 
-    const leadId = leadData._embedded?.leads?.[0]?.id;
-
-    if (leadId) {
-      const noteText = `RESERVA AUTOMÁTICA:\nFecha: ${fecha}\nHorario: ${horario}\nModelo: ${modelo}\nCantidad: ${cantidad}\nTipo: ${tipo}\nEmail: ${email}\nTeléfono: ${telefono}\nAceptó términos: Sí`;
-
-      // Add note with booking details
-      await fetch(`${base}/leads/${leadId}/notes`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify([{ note_type: 'common', params: { text: noteText } }])
-      });
-
-      // Create contact with phone + email
-      const contactRes = await fetch(`${base}/contacts`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify([{
-          name: nombre,
-          custom_fields_values: [
-            { field_code: 'EMAIL', values: [{ value: email, enum_code: 'WORK' }] },
-            { field_code: 'PHONE', values: [{ value: telefono, enum_code: 'WORK' }] }
-          ]
-        }])
-      });
-
-      if (contactRes.ok) {
-        const contactData = await contactRes.json();
-        const contactId = contactData._embedded?.contacts?.[0]?.id;
-        if (contactId) {
-          await fetch(`${base}/leads/${leadId}/links`, {
-            method: 'POST',
-            headers,
-            body: JSON.stringify([{ to_entity_id: contactId, to_entity_type: 'contacts' }])
-          });
-        }
-      }
-    }
+    const leadId = complexData._embedded?.leads?.[0]?.id;
+    const contactId = complexData._embedded?.contacts?.[0]?.id;
+    console.log('Lead creado:', leadId, '| Contacto creado:', contactId);
 
     return res.status(200).json({ success: true, message: 'Reserva enviada a Kommo', lead_id: leadId });
 
