@@ -1579,9 +1579,89 @@
     /* ─── SUCCESS MESSAGE ─── */
     #booking-success {
       padding: 1.5em;
-      background-color: rgba(76, 175, 80, 0.05);
-      border-radius: 8px;
+    }
+
+    .booking-confirmation {
+      background: #0C0C0C;
+      border: 2px solid #F5C800;
+      border-radius: 12px;
+      padding: 2em 1.5em;
       text-align: center;
+    }
+
+    .confirmation-icon {
+      font-size: 3em;
+      margin-bottom: 0.3em;
+    }
+
+    .confirmation-title {
+      font-size: 1.5em;
+      font-weight: 800;
+      color: #F5C800;
+      margin: 0 0 0.3em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .confirmation-subtitle {
+      color: #999;
+      font-size: 0.9em;
+      margin: 0 0 1.5em;
+    }
+
+    .confirmation-details {
+      background: rgba(245, 200, 0, 0.06);
+      border-radius: 8px;
+      padding: 1em;
+      margin-bottom: 1.5em;
+      text-align: left;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4em 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    .detail-row:last-child { border-bottom: none; }
+
+    .detail-row strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .confirmation-cta-text {
+      color: #aaa;
+      font-size: 0.85em;
+      margin: 0 0 0.8em;
+    }
+
+    .btn-whatsapp-confirm {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6em;
+      background: #25D366;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.05em;
+      padding: 1em 1.5em;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-whatsapp-confirm:hover { background: #1ebe5d; }
+
+    .confirmation-hint {
+      color: #666;
+      font-size: 0.75em;
+      margin: 0.8em 0 0;
     }
 
   </style>
@@ -2386,10 +2466,19 @@
               CONFIRMAR RESERVA →
             </button>
 
-            <!-- Mensaje de éxito (oculto) -->
-            <div id="booking-success" style="display:none; margin-top:1.5em; text-align:center;">
-              <p style="font-size:18px; font-weight:bold; color:#4CAF50;">✅ ¡Reserva confirmada!</p>
-              <p style="font-size:14px; color:#666;">Recibirás un WhatsApp en 1 minuto</p>
+            <!-- Pantalla de confirmación (oculta hasta submit) -->
+            <div id="booking-success" style="display:none; margin-top:1.5em;">
+              <div class="booking-confirmation">
+                <div class="confirmation-icon">✅</div>
+                <h3 class="confirmation-title">¡Reserva recibida!</h3>
+                <p class="confirmation-subtitle">Tu solicitud ya está en nuestro sistema. Completá la confirmación por WhatsApp para asegurar el turno.</p>
+                <div class="confirmation-details" id="confirmation-details"></div>
+                <p class="confirmation-cta-text">Tu mensaje ya viene pre-llenado con los datos de tu reserva:</p>
+                <a id="whatsapp-confirm-btn" href="#" target="_blank" rel="noopener" class="btn-whatsapp-confirm">
+                  💬 Confirmar por WhatsApp
+                </a>
+                <p class="confirmation-hint">Se abre WhatsApp con todo completado — solo tocás Enviar</p>
+              </div>
             </div>
 
             <div class="booking-message">
@@ -3167,12 +3256,23 @@
       const data = await res.json();
 
       if (data.success) {
-        // Mostrar mensaje de éxito
+        // Construir URL de WhatsApp pre-llenada con todos los datos
+        const waText = `Hola! Acabo de reservar un monopatín en Fly Free Urban 🛴\n\n📅 Fecha: ${payload.fecha}\n🕐 Horario: ${payload.horario}\n🛴 Modelo: ${payload.modelo}\n👥 Cantidad: ${payload.cantidad}\n👤 Nombre: ${payload.nombre}\n📧 Email: ${payload.email}\n📱 Teléfono: ${payload.telefono}\n✅ Acepto términos y condiciones\n\n¿Me confirman el turno?`;
+        document.getElementById('whatsapp-confirm-btn').href =
+          'https://api.whatsapp.com/send?phone=5491151097151&text=' + encodeURIComponent(waText);
+
+        // Mostrar resumen de la reserva
+        document.getElementById('confirmation-details').innerHTML = `
+          <div class="detail-row"><span>📅 Fecha</span><strong>${payload.fecha}</strong></div>
+          <div class="detail-row"><span>🕐 Horario</span><strong>${payload.horario}</strong></div>
+          <div class="detail-row"><span>🛴 Modelo</span><strong>${payload.modelo}</strong></div>
+          <div class="detail-row"><span>👥 Cantidad</span><strong>${payload.cantidad}</strong></div>
+          <div class="detail-row"><span>👤 Nombre</span><strong>${payload.nombre}</strong></div>
+          <div class="detail-row"><span>📱 Teléfono</span><strong>${payload.telefono}</strong></div>
+        `;
+
         bookingForm.style.display = 'none';
         document.getElementById('booking-success').style.display = 'block';
-
-        // Recargar después de 5s
-        setTimeout(() => window.location.reload(), 5000);
       } else {
         alert('Error: ' + (data.error || 'No se pudo procesar la reserva'));
         submitBtn.disabled = false;
