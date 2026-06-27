@@ -2,12 +2,8 @@
   "name": "flyfree-landing-alquiler-monopatines",
   "version": "1.0.0",
   "description": "Landing de alquiler de monopatines con integración Kommo",
-  "main": "index.html",
-  "type": "module",
-  "scripts": {
-    "build": "echo 'Static site'"
-  },
+  "private": true,
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   }
 }
