@@ -2152,7 +2152,7 @@
     <div class="booking-container">
       <div class="booking-left">
         <h3>Próximas disponibilidades</h3>
-        <input type="text" id="calendar" class="flatpickr-input" placeholder="Selecciona una fecha" readonly />
+        <div id="calendar"></div>
       </div>
       <div class="booking-right">
         <div id="time-slots-container" style="display:none;">
@@ -2634,7 +2634,7 @@
   // ═══ MAPA INTERACTIVO ═══
   const mapContainer = document.getElementById('map-container');
   if (mapContainer) {
-    const map = L.map('map').setView([-34.569, -58.427], 12);
+    const map = L.map('map-container').setView([-34.569, -58.427], 12);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
@@ -2778,8 +2778,10 @@
   const calendarElement = document.getElementById('calendar');
   if (calendarElement) {
     flatpickr(calendarElement, {
+      inline: true,
       mode: 'single',
       minDate: 'today',
+      locale: { firstDayOfWeek: 1 },
       disable: [
         function(date) {
           const dateStr = date.toISOString().split('T')[0];
