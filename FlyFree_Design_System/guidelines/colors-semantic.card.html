@@ -1,0 +1,31 @@
+<!-- @dsCard group="Colors" viewport="700x160" name="Semantic Tokens" subtitle="Surface, text, border, and status semantic aliases" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--color-neutral-900); font-family: var(--font-display); padding: 16px 20px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; height: 128px; }
+    .row { display: flex; align-items: center; gap: 10px; }
+    .chip { width: 28px; height: 28px; flex-shrink: 0; border: 1px solid #383838; }
+    .info { display: flex; flex-direction: column; gap: 2px; }
+    .name  { font-size: 10px; font-weight: 700; color: #fff; letter-spacing: 0.08em; text-transform: uppercase; }
+    .token { font-size: 9px; font-weight: 300; color: #525252; }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="row"><div class="chip" style="background:var(--color-surface-card);"></div><div class="info"><span class="name">Surface Card</span><span class="token">--color-surface-card</span></div></div>
+    <div class="row"><div class="chip" style="background:var(--color-text-primary); border-color:#737373;"></div><div class="info"><span class="name">Text Primary</span><span class="token">--color-text-primary</span></div></div>
+    <div class="row"><div class="chip" style="background:var(--color-accent-primary);"></div><div class="info"><span class="name">Accent Primary</span><span class="token">--color-accent-primary</span></div></div>
+    <div class="row"><div class="chip" style="background:var(--color-surface-elevated);"></div><div class="info"><span class="name">Surface Elevated</span><span class="token">--color-surface-elevated</span></div></div>
+    <div class="row"><div class="chip" style="background:var(--color-text-secondary);"></div><div class="info"><span class="name">Text Secondary</span><span class="token">--color-text-secondary</span></div></div>
+    <div class="row"><div class="chip" style="background:var(--color-border-default);"></div><div class="info"><span class="name">Border Default</span><span class="token">--color-border-default</span></div></div>
+    <div class="row"><div class="chip" style="background:var(--color-success);"></div><div class="info"><span class="name">Success</span><span class="token">--color-success</span></div></div>
+    <div class="row"><div class="chip" style="background:var(--color-warning);"></div><div class="info"><span class="name">Warning</span><span class="token">--color-warning</span></div></div>
+    <div class="row"><div class="chip" style="background:var(--color-error);"></div><div class="info"><span class="name">Error</span><span class="token">--color-error</span></div></div>
+  </div>
+</body>
+</html>

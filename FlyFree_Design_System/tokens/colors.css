@@ -1,0 +1,57 @@
+:root {
+
+  /* ─── Brand Core ────────────────────────────────────────────────────────── */
+  --color-brand-yellow:   #F5C800;   /* Logo gold — primary accent */
+  --color-brand-electric: #C8FF00;   /* Neon lime — energy/sale moments */
+  --color-brand-black:    #0C0C0C;   /* Deep brand black */
+  --color-brand-white:    #FFFFFF;
+  --color-brand-offwhite: #F4F3EE;   /* Warm off-white for light surfaces */
+
+  /* ─── Neutral Scale (10-step) ───────────────────────────────────────────── */
+  --color-neutral-950: #0C0C0C;
+  --color-neutral-900: #181818;
+  --color-neutral-800: #252525;
+  --color-neutral-700: #383838;
+  --color-neutral-600: #525252;
+  --color-neutral-500: #737373;
+  --color-neutral-400: #959595;
+  --color-neutral-300: #B8B8B8;
+  --color-neutral-200: #D5D5D5;
+  --color-neutral-100: #EBEBEB;
+  --color-neutral-50:  #F4F4F2;
+
+  /* ─── Semantic — Surface ────────────────────────────────────────────────── */
+  --color-surface-default:  #0C0C0C;
+  --color-surface-elevated: #181818;
+  --color-surface-card:     #1C1C1C;
+  --color-surface-overlay:  rgba(12,12,12,0.88);
+  --color-surface-inverse:  #FFFFFF;
+
+  /* ─── Semantic — Text ───────────────────────────────────────────────────── */
+  --color-text-primary:           #FFFFFF;
+  --color-text-secondary:         #959595;
+  --color-text-tertiary:          #525252;
+  --color-text-accent:            #F5C800;
+  --color-text-inverse:           #0C0C0C;
+  --color-text-inverse-secondary: #525252;
+
+  /* ─── Semantic — Border ─────────────────────────────────────────────────── */
+  --color-border-default: #252525;
+  --color-border-subtle:  #1C1C1C;
+  --color-border-strong:  #525252;
+  --color-border-accent:  #F5C800;
+
+  /* ─── Semantic — Interactive ────────────────────────────────────────────── */
+  --color-accent-primary:          #F5C800;
+  --color-accent-primary-hover:    #FFD400;
+  --color-accent-primary-active:   #DDB400;
+  --color-accent-electric:         #C8FF00;
+  --color-accent-electric-hover:   #D8FF44;
+  --color-accent-electric-active:  #AADD00;
+
+  /* ─── Status ────────────────────────────────────────────────────────────── */
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-error:   #EF4444;
+  --color-info:    #3B82F6;
+}

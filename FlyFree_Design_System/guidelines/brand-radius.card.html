@@ -1,0 +1,30 @@
+<!-- @dsCard group="Brand" viewport="700x150" name="Border Radius" subtitle="Sharp corners as brand signal — radius used sparingly" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--color-neutral-950); font-family: var(--font-display); padding: 20px 28px; }
+    .row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .box { width: 56px; height: 56px; background: var(--color-neutral-800); border: 2px solid var(--color-neutral-700); }
+    .label { font-size: 9px; font-weight: 700; color: #525252; text-transform: uppercase; letter-spacing: 0.08em; text-align: center; }
+    .token { font-size: 8px; font-weight: 300; color: #383838; }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <div class="item"><div class="box" style="border-radius:0px;"></div><span class="label">None<br>0px</span><span class="token">--radius-none</span></div>
+    <div class="item"><div class="box" style="border-radius:2px;"></div><span class="label">SM<br>2px</span><span class="token">--radius-sm</span></div>
+    <div class="item"><div class="box" style="border-radius:4px;"></div><span class="label">MD<br>4px</span><span class="token">--radius-md</span></div>
+    <div class="item"><div class="box" style="border-radius:8px;"></div><span class="label">LG<br>8px</span><span class="token">--radius-lg</span></div>
+    <div class="item"><div class="box" style="border-radius:9999px; width:56px; height:28px;"></div><span class="label">Full<br>Pill</span><span class="token">--radius-full</span></div>
+    <div style="border-left:1px solid #252525; padding-left:20px; flex:1;">
+      <p style="font-size:11px; font-weight:700; color:#F5C800; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">Brand Rule</p>
+      <p style="font-size:11px; font-weight:300; color:#737373; line-height:1.5;">Buttons, cards, inputs, and badges use <strong style="color:#fff; font-weight:700;">0px</strong> radius. Sharp corners signal precision and athletic performance. Pill radius reserved for avatars and utility tags only.</p>
+    </div>
+  </div>
+</body>
+</html>

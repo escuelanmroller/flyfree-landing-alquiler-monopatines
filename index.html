@@ -1,0 +1,2853 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alquiler de Monopatín Eléctrico en Palermo · Recorrí Buenos Aires a tu ritmo</title>
+  <meta name="description" content="Alquilá un monopatín eléctrico en Palermo y explorá el Rosedal, Puerto Madero y Recoleta. Sin experiencia previa. Casco incluido. Soporte humano. Desde $25.000/hora." />
+  <meta property="og:title" content="Alquiler de Monopatín Eléctrico en Palermo · Fly Free Urban" />
+  <meta property="og:description" content="Recorrí el Rosedal y los mejores barrios de Buenos Aires en monopatín eléctrico. Sin experiencia, con soporte real. Desde $25.000/hora." />
+  <meta property="og:type" content="website" />
+
+  <!-- Playfair Display italic — DS editorial contrast font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
+
+  <!-- Splide carousel CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/@splidejs/splide@4.1.4/dist/css/splide.min.css" />
+
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Flatpickr Calendar CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css" />
+  <script src="https://unpkg.com/flatpickr"></script>
+
+  <style>
+
+    /* ─── FUTURA STD — Brand typeface ─── */
+    @font-face {
+      font-family: 'Futura Std';
+      font-weight: 300; font-style: normal; font-display: swap;
+      src: url('FlyFree_Design_System/assets/fonts/FuturaStd-Book.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Futura Std';
+      font-weight: 400; font-style: normal; font-display: swap;
+      src: url('FlyFree_Design_System/assets/fonts/FuturaStd-Medium.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Futura Std';
+      font-weight: 700; font-style: normal; font-display: swap;
+      src: url('FlyFree_Design_System/assets/fonts/FuturaStd-Bold.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Futura Std';
+      font-weight: 800; font-style: normal; font-display: swap;
+      src: url('FlyFree_Design_System/assets/fonts/FuturaStd-ExtraBold.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Futura Std';
+      font-weight: 900; font-style: normal; font-display: swap;
+      src: url('FlyFree_Design_System/assets/fonts/FuturaStd-Heavy.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Futura Std Cond';
+      font-weight: 300; font-style: normal; font-display: swap;
+      src: url('FlyFree_Design_System/assets/fonts/FuturaStd-CondensedLight.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Futura Std Cond';
+      font-weight: 400; font-style: normal; font-display: swap;
+      src: url('FlyFree_Design_System/assets/fonts/FuturaStd-Condensed.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Futura Std Cond';
+      font-weight: 700; font-style: normal; font-display: swap;
+      src: url('FlyFree_Design_System/assets/fonts/FuturaStd-CondensedBold.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Futura Std Cond';
+      font-weight: 900; font-style: normal; font-display: swap;
+      src: url('FlyFree_Design_System/assets/fonts/FuturaStd-CondensedExtraBd.otf') format('opentype');
+    }
+
+    /* ─── DS TOKENS ─── */
+    :root {
+      /* Surfaces */
+      --bg-dark:           #0C0C0C;
+      --bg-elevated:       #141414;
+      --bg-card:           #1C1C1C;
+      --bg-mid:            #181818;
+
+      /* Brand palette */
+      --yellow:            #F5C800;
+      --yellow-hover:      #FFD400;
+      --yellow-active:     #DDB400;
+      --electric:          #C8FF00;
+
+      /* Text */
+      --white:             #FFFFFF;
+      --text-secondary:    #737373;
+      --text-tertiary:     #525252;
+      --text-body:         #B8B8B8;
+
+      /* Borders */
+      --border:            #252525;
+      --border-subtle:     #1C1C1C;
+      --border-strong:     #383838;
+
+      /* Effects */
+      --glow-yellow:       0 0 28px rgba(245,200,0,0.35);
+      --glow-yellow-lg:    0 0 48px rgba(245,200,0,0.45);
+      --shadow-md:         0 4px 16px rgba(0,0,0,0.6);
+      --shadow-lg:         0 8px 32px rgba(0,0,0,0.7);
+      --shadow-xl:         0 16px 64px rgba(0,0,0,0.8);
+
+      /* Transitions */
+      --t-base:            all 0.18s ease;
+      --t-slow:            all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Typography */
+      --font:              'Futura Std', 'Futura', 'Century Gothic', sans-serif;
+      --font-cond:         'Futura Std Cond', 'Futura Condensed', 'Arial Narrow', sans-serif;
+      --font-serif:        'Playfair Display', Georgia, 'Times New Roman', serif;
+
+      /* Photography filter */
+      --filter-brand:      grayscale(18%) brightness(0.72) contrast(1.12);
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    a { text-decoration: none; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO ANIMATIONS ─── */
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes heroFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .h-badge  { animation: heroFade 0.5s ease both 0.05s; opacity: 0; }
+    .h-line1  { animation: heroIn  0.75s cubic-bezier(0.16,1,0.3,1) both 0.2s; opacity: 0; }
+    .h-line2  { animation: heroIn  0.75s cubic-bezier(0.16,1,0.3,1) both 0.42s; opacity: 0; }
+    .h-serif  { animation: heroFade 0.7s ease both 0.65s; opacity: 0; }
+    .h-cta    { animation: heroIn  0.6s ease both 0.85s; opacity: 0; }
+    .h-stats  { animation: heroFade 0.6s ease both 1.1s; opacity: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      .h-badge,.h-line1,.h-line2,.h-serif,.h-cta,.h-stats { animation: none; opacity: 1; }
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1, h2 {
+      font-family: var(--font);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    h3 {
+      font-family: var(--font);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+    }
+    h4 {
+      font-family: var(--font);
+      font-weight: 700;
+    }
+    h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); }
+    h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+    h3 { font-size: clamp(1rem, 2.2vw, 1.35rem); }
+
+    p {
+      font-family: var(--font);
+      font-weight: 300;
+      color: var(--text-body);
+      line-height: 1.75;
+    }
+
+    /* Label / eyebrow */
+    .label {
+      display: inline-block;
+      font-family: var(--font);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 1rem;
+    }
+
+    /* Serif italic — editorial contrast (Playfair) */
+    .serif-italic {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0.01em;
+    }
+
+    /* Yellow accent in headlines */
+    .highlight { color: var(--yellow); }
+
+    /* Condensed display (stats, big numbers) */
+    .cond {
+      font-family: var(--font-cond);
+      font-weight: 900;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.2rem;
+      font-family: var(--font);
+      font-size: 0.82rem;
+      font-weight: 900;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      border: none;
+      transition: var(--t-base);
+      line-height: 1;
+    }
+    .btn-primary {
+      background: var(--yellow);
+      color: #0C0C0C;
+    }
+    .btn-primary:hover {
+      background: var(--yellow-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--glow-yellow);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--yellow);
+      border: 2px solid var(--yellow);
+    }
+    .btn-outline:hover {
+      background: var(--yellow);
+      color: #0C0C0C;
+      box-shadow: var(--glow-yellow);
+    }
+
+    /* ─── LAYOUT ─── */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 4vw, 2rem);
+    }
+    section { padding: 5rem 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(12,12,12,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 clamp(1rem, 4vw, 2rem);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .nav-logo-bg {
+      background: #FFFFFF;
+      padding: 5px 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-bg img {
+      height: 26px;
+      object-fit: contain;
+      display: block;
+    }
+    .nav-cta { padding: 0.6rem 1.4rem; font-size: 0.78rem; }
+
+    /* ─── HERO ─── */
+    #hero {
+      padding-top: 68px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+    }
+    .hero-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 65% at 72% 50%, rgba(245,200,0,0.055) 0%, transparent 62%),
+        radial-gradient(ellipse 28% 38% at 12% 82%, rgba(245,200,0,0.04) 0%, transparent 55%);
+    }
+    .hero-img-panel {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 44%;
+      overflow: hidden;
+    }
+    .hero-img-panel img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      filter: var(--filter-brand);
+    }
+    .hero-img-panel::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--bg-dark) 0%, rgba(12,12,12,0.12) 55%, transparent 100%);
+      z-index: 1;
+    }
+    .hero-img-panel::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, var(--bg-dark) 0%, transparent 28%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 610px;
+      padding: 3rem 0;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(245,200,0,0.08);
+      border: 1px solid rgba(245,200,0,0.22);
+      padding: 0.4rem 1rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 1.8rem;
+    }
+    .hero-h1 { margin-bottom: 0.6rem; }
+    .hero-h1-italic {
+      display: block;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+      text-transform: none;
+      letter-spacing: 0.01em;
+      color: var(--yellow);
+      line-height: 1.25;
+      margin-top: 0.3rem;
+    }
+    .hero-sub {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 2.4rem;
+      max-width: 490px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.4rem;
+      flex-wrap: wrap;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat-number {
+      font-family: var(--font-cond);
+      font-weight: 900;
+      font-size: 2.2rem;
+      color: var(--yellow);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .stat-label {
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.62rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 0.25rem;
+    }
+
+    /* ─── TICKER / MARQUEE ─── */
+    .ticker {
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.8rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+      width: max-content;
+    }
+    .ticker span {
+      font-family: var(--font-cond);
+      font-weight: 900;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+      padding: 0 2.2rem;
+    }
+    .ticker span.accent { color: var(--yellow); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── PROBLEMA ─── */
+    #problema {
+      background: var(--bg-mid);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .problema-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 3rem;
+    }
+    .problema-card {
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      transition: var(--t-base);
+    }
+    .problema-card:hover { border-color: var(--border-strong); }
+    .problema-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .problema-card h3 {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .problema-card p { font-size: 0.85rem; color: var(--text-tertiary); }
+
+    /* ─── EXPERIENCIA ─── */
+    #experiencia { background: var(--bg-dark); }
+    .exp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 3rem;
+    }
+    .exp-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      transition: var(--t-base);
+    }
+    .exp-card:hover {
+      border-color: rgba(245,200,0,0.22);
+      background: rgba(245,200,0,0.025);
+    }
+    .exp-icon {
+      width: 44px; height: 44px;
+      background: var(--yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .exp-text h3 {
+      font-size: 0.88rem;
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .exp-text p { font-size: 0.82rem; }
+
+    /* ─── STORE STRIP ─── */
+    .store-strip {
+      position: relative;
+      height: 260px;
+      overflow: hidden;
+    }
+    .store-strip img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      filter: var(--filter-brand);
+    }
+    .store-strip-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right,
+        rgba(12,12,12,0.88) 0%,
+        rgba(12,12,12,0.18) 50%,
+        rgba(12,12,12,0.88) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.6rem;
+      text-align: center;
+    }
+    .store-strip-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+    .store-strip-text {
+      font-family: var(--font-cond);
+      font-weight: 900;
+      font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+
+    /* ─── RECORRIDOS ─── */
+    #recorridos { background: var(--bg-mid); }
+    .route-card {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: var(--t-base);
+      position: relative;
+      overflow: hidden;
+    }
+    .route-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--yellow);
+    }
+    .route-card:hover {
+      border-color: rgba(245,200,0,0.25);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .route-badge {
+      display: inline-block;
+      background: var(--yellow);
+      color: #0C0C0C;
+      font-size: 0.58rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.7rem;
+      margin-bottom: 1rem;
+    }
+    .route-title {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    .route-meta {
+      display: flex;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+    .route-meta-item { display: flex; flex-direction: column; }
+    .route-meta-item span:first-child {
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-tertiary);
+      font-weight: 700;
+    }
+    .route-meta-item span:last-child {
+      font-family: var(--font-cond);
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--yellow);
+    }
+    .route-highlights { list-style: none; margin-top: 1rem; }
+    .route-highlights li {
+      font-size: 0.82rem;
+      color: var(--text-body);
+      padding: 0.25rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+      font-weight: 300;
+    }
+    .route-highlights li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--yellow);
+      font-size: 0.7rem;
+    }
+
+    /* ─── MODELOS / PRECIOS ─── */
+    #modelos { background: var(--bg-dark); }
+    .models-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 3rem;
+    }
+    .model-card {
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      background: var(--bg-card);
+    }
+    .model-card.featured {
+      border-color: var(--yellow);
+      background: #141200;
+    }
+    .model-card.featured::before {
+      content: 'MÁS POPULAR';
+      position: absolute;
+      top: -1px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--yellow);
+      color: #0C0C0C;
+      font-size: 0.58rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      padding: 0.3rem 1rem;
+    }
+    .model-name {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 0.6rem;
+    }
+    .model-price {
+      font-family: var(--font-cond);
+      font-weight: 900;
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
+    }
+    .model-period {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 1.5rem;
+    }
+    .model-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text-body);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.7;
+    }
+    .model-features { list-style: none; margin-bottom: 2rem; }
+    .model-features li {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-body);
+      padding: 0.4rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+    }
+    .model-features li::before {
+      content: '✓';
+      color: var(--yellow);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .model-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 2rem;
+    }
+    .spec {
+      display: flex;
+      flex-direction: column;
+      padding: 0.8rem;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+    }
+    .spec-label {
+      font-size: 0.57rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-tertiary);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .spec-value {
+      font-family: var(--font-cond);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--white);
+    }
+    .note-box {
+      background: rgba(245,200,0,0.04);
+      border: 1px solid rgba(245,200,0,0.14);
+      padding: 1.2rem 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--text-body);
+      margin-top: 1.5rem;
+      text-align: center;
+      line-height: 1.75;
+    }
+
+    /* ─── TESTIMONIOS ─── */
+    #testimonios { background: var(--bg-mid); }
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 3rem;
+    }
+    .test-card {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      padding: 2rem;
+    }
+    .test-stars {
+      color: var(--yellow);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.15em;
+    }
+    .test-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--text-body);
+      margin-bottom: 1.5rem;
+      line-height: 1.75;
+    }
+    .test-quote::before { content: '"'; }
+    .test-quote::after  { content: '"'; }
+    .test-name {
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .test-origin {
+      font-size: 0.7rem;
+      color: var(--text-tertiary);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      margin-top: 0.2rem;
+    }
+    .proof-bar {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .proof-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .proof-number {
+      font-family: var(--font-cond);
+      font-weight: 900;
+      font-size: 2.4rem;
+      color: var(--yellow);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .proof-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 0.3rem;
+    }
+
+    /* ─── OBJECIONES ─── */
+    #objeciones { background: var(--bg-dark); }
+    .obj-list { margin-top: 3rem; }
+    .obj-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .obj-question {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      position: relative;
+      padding-left: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .obj-question::before {
+      content: '✗';
+      position: absolute;
+      left: 0;
+      color: var(--border-strong);
+    }
+    .obj-answer {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text-body);
+      position: relative;
+      padding-left: 1.5rem;
+      line-height: 1.7;
+    }
+    .obj-answer::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--yellow);
+      font-weight: 900;
+    }
+
+    /* ─── BRIDGE ─── */
+    #bridge { background: var(--yellow); }
+    .bridge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .bridge-cards { display: flex; flex-direction: column; gap: 2px; }
+    .bridge-card {
+      background: rgba(0,0,0,0.07);
+      border: 1px solid rgba(0,0,0,0.1);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      transition: var(--t-base);
+    }
+    .bridge-card:hover { background: rgba(0,0,0,0.14); }
+    .bridge-card-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(12,12,12,0.45);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .bridge-card-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #0C0C0C;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .bridge-arrow { font-size: 1.2rem; color: #0C0C0C; font-weight: 900; }
+
+    /* ─── FAQ ─── */
+    #faq { background: var(--bg-mid); }
+    .faq-list { margin-top: 3rem; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-align: left;
+      padding: 1.3rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: var(--t-base);
+    }
+    .faq-question:hover { color: var(--yellow); }
+    .faq-toggle {
+      width: 22px; height: 22px;
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--yellow);
+      flex-shrink: 0;
+      transition: transform 0.18s;
+    }
+    .faq-answer {
+      display: none;
+      padding: 0 0 1.3rem;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text-body);
+      max-width: 700px;
+      line-height: 1.75;
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); border-color: var(--yellow); }
+    .faq-item.open .faq-question { color: var(--yellow); }
+
+    /* ─── CTA FINAL ─── */
+    #cta-final {
+      text-align: center;
+      padding: 7rem 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+    }
+    .cta-bg-img {
+      position: absolute; inset: 0; overflow: hidden;
+    }
+    .cta-bg-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: grayscale(20%) brightness(0.14) contrast(1.1);
+    }
+    .cta-bg-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 55% 50% at 50% 50%, rgba(245,200,0,0.07), transparent 65%);
+    }
+    .cta-final-content {
+      position: relative; z-index: 2;
+    }
+    .cta-note {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-tertiary);
+      margin-top: 1.2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #060606;
+      border-top: 1px solid var(--border-subtle);
+      padding: 2.5rem clamp(1rem, 4vw, 2rem);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+    .footer-logo-bg {
+      background: #FFFFFF;
+      padding: 4px 12px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .footer-logo-bg img {
+      height: 20px;
+      object-fit: contain;
+      display: block;
+    }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: var(--t-base);
+    }
+    .footer-links a:hover { color: var(--yellow); }
+    .footer-copy {
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: var(--border-strong);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── WA FLOAT ─── */
+    .wa-float {
+      position: fixed;
+      bottom: 1.5rem; right: 1.5rem;
+      z-index: 200;
+      background: #25D366;
+      color: white;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: var(--t-base);
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+
+    /* ─── GALERÍA ─── */
+    #galeria { background: var(--bg-dark); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--t-base);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+      filter: var(--filter-brand);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(245,200,0,0) 0%, rgba(12,12,12,0.6) 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    .gallery-title {
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 12, 12, 0.95);
+      z-index: 300;
+      animation: fadeIn 0.3s ease;
+    }
+    .lightbox-modal.open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-content {
+      position: relative;
+      width: 90%;
+      max-width: 900px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      animation: slideUp 0.3s ease;
+    }
+    .lightbox-image {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+    .lightbox-caption {
+      background: rgba(0, 0, 0, 0.7);
+      color: var(--white);
+      padding: 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 2px;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--t-base);
+      z-index: 10;
+    }
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 2px;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--t-base);
+      z-index: 10;
+    }
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* ─── MAPA ─── */
+    #map-container {
+      margin-top: 3rem;
+      height: 500px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+    .leaflet-container {
+      background: var(--bg-dark);
+    }
+    .leaflet-popup-content-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+    }
+    .leaflet-popup-content {
+      color: var(--white);
+      font-family: var(--font-base);
+      font-size: 0.9rem;
+      margin: 0;
+      padding: 8px;
+    }
+    .leaflet-popup-tip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+    .route-marker-popup {
+      min-width: 200px;
+    }
+    .route-marker-popup h4 {
+      margin: 0 0 0.5rem 0;
+      color: var(--yellow);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .route-marker-popup p {
+      margin: 0.25rem 0;
+      color: var(--text-body);
+      font-size: 0.85rem;
+    }
+    .route-marker-popup .meta-item {
+      display: inline-block;
+      margin-right: 1rem;
+      margin-top: 0.5rem;
+    }
+    .route-marker-popup .meta-label {
+      color: var(--text-tertiary);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .route-marker-popup .meta-value {
+      color: var(--yellow);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .leaflet-control-zoom {
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      border-radius: 2px;
+    }
+    .leaflet-control-zoom a {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      color: var(--white);
+    }
+    .leaflet-control-zoom a:hover {
+      background: var(--bg-elevated);
+      color: var(--yellow);
+    }
+    .leaflet-control-zoom a:last-child {
+      border-bottom: none;
+    }
+
+    /* ─── CALENDARIO & BOOKING ─── */
+    #booking { background: var(--bg-mid); }
+    .booking-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .booking-left h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+    .flatpickr-calendar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+    .flatpickr-months {
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+    }
+    .flatpickr-prev-month, .flatpickr-next-month {
+      color: var(--text-secondary);
+    }
+    .flatpickr-prev-month:hover, .flatpickr-next-month:hover {
+      color: var(--yellow);
+    }
+    .flatpickr-current-month {
+      color: var(--white);
+      font-weight: 700;
+    }
+    .flatpickr-day {
+      color: var(--text-body);
+    }
+    .flatpickr-day.selected {
+      background: var(--yellow);
+      color: #0C0C0C;
+      border-color: var(--yellow);
+    }
+    .flatpickr-day.today {
+      border-color: var(--yellow);
+    }
+    .flatpickr-day:hover {
+      background: rgba(245, 200, 0, 0.2);
+      border-color: var(--yellow);
+    }
+    .flatpickr-day.disabled {
+      color: var(--text-tertiary);
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .booking-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .time-slots {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .time-slot-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .time-slot {
+      padding: 1rem;
+      background: var(--bg-dark);
+      border: 2px solid var(--border);
+      text-align: center;
+      cursor: pointer;
+      transition: var(--t-base);
+      border-radius: 2px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-body);
+    }
+    .time-slot:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+    .time-slot.selected {
+      background: var(--yellow);
+      border-color: var(--yellow);
+      color: #0C0C0C;
+    }
+    .time-slot:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      border-color: var(--border-subtle);
+    }
+
+    .booking-summary {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 2px;
+    }
+    .booking-summary h4 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--text-body);
+    }
+    .summary-item span:last-child {
+      color: var(--yellow);
+      font-weight: 600;
+    }
+    .summary-divider {
+      border-top: 1px solid var(--border);
+      margin: 1rem 0;
+    }
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .booking-summary .btn {
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+
+    .booking-message {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-img-panel { display: none; }
+    }
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .booking-container { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .problema-grid, .models-grid,
+      .test-grid, .obj-item, .bridge-grid, .exp-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { text-align: center; }
+      .proof-bar { gap: 2rem; }
+      nav { padding: 0 1rem; }
+      .lightbox-content { width: 95%; }
+      .lightbox-image { max-height: 60vh; }
+      #map-container { height: 350px; }
+      .booking-container { grid-template-columns: 1fr; }
+      .time-slot-group { grid-template-columns: repeat(2, 1fr); }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-bg">
+      <img src="FlyFree_Design_System/assets/logo.png" alt="Fly Free Urban" />
+    </div>
+  </a>
+  <a href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Quiero%20reservar%20un%20monopatín%20eléctrico%20en%20Palermo" class="btn btn-primary nav-cta" target="_blank" rel="noopener">
+    Reservar ahora
+  </a>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section id="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-img-panel">
+    <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+      <source src="/assets/video-hero.mp4" type="video/mp4">
+      <img src="FlyFree_Design_System/assets/lifestyle-scooter-2.jpg" alt="Monopatín eléctrico en Buenos Aires" style="width: 100%; height: 100%; object-fit: cover;" />
+    </video>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+
+      <div class="hero-badge h-badge">
+        📍 Showroom en Palermo · A 2 cuadras del Rosedal
+      </div>
+
+      <h1 class="hero-h1">
+        <span class="h-line1" style="display:block;">La ciudad tiene<br>otra cara.</span>
+        <span class="hero-h1-italic h-line2">Esta es la que encontrás en monopatín.</span>
+      </h1>
+
+      <p class="hero-sub h-serif">
+        Alquilá un monopatín eléctrico en Palermo y recorrí el Rosedal, Puerto Madero y Recoleta
+        a tu ritmo — sin experiencia previa, con casco incluido y soporte humano de personas reales.
+      </p>
+
+      <div class="hero-actions h-cta">
+        <a href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Quiero%20reservar%20un%20monopatín%20eléctrico.%20¿Tienen%20disponibilidad%20para%20hoy%3F" class="btn btn-primary" target="_blank" rel="noopener">
+          Reservar mi monopatín →
+        </a>
+        <a href="#modelos" class="btn btn-outline">Ver precios</a>
+      </div>
+
+      <div class="hero-stats h-stats">
+        <div class="stat">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">Alquileres realizados</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">4.9⭐</span>
+          <span class="stat-label">En Google Maps</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">5 min</span>
+          <span class="stat-label">Y ya vas solo</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">40 km</span>
+          <span class="stat-label">Autonomía modelo Pro</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker" role="marquee" aria-label="Beneficios">
+  <div class="ticker-inner">
+    <span>Sin experiencia previa</span>
+    <span class="accent">·</span>
+    <span>Palermo al Rosedal</span>
+    <span class="accent">·</span>
+    <span>Casco incluido</span>
+    <span class="accent">·</span>
+    <span>Soporte WhatsApp</span>
+    <span class="accent">·</span>
+    <span>Sin depósito complicado</span>
+    <span class="accent">·</span>
+    <span>Puerto Madero</span>
+    <span class="accent">·</span>
+    <span>Recoleta</span>
+    <span class="accent">·</span>
+    <span>Sin experiencia previa</span>
+    <span class="accent">·</span>
+    <span>Palermo al Rosedal</span>
+    <span class="accent">·</span>
+    <span>Casco incluido</span>
+    <span class="accent">·</span>
+    <span>Soporte WhatsApp</span>
+    <span class="accent">·</span>
+    <span>Sin depósito complicado</span>
+    <span class="accent">·</span>
+    <span>Puerto Madero</span>
+    <span class="accent">·</span>
+    <span>Recoleta</span>
+    <span class="accent">·</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PROBLEMA ═══════════════════════════════ -->
+<section id="problema">
+  <div class="container">
+    <span class="label">El problema que nadie te dice</span>
+    <h2>La ciudad está ahí.<br>Vos la seguís viendo desde adentro.</h2>
+    <p style="max-width:560px; margin-top:1rem;">
+      Querés salir, moverte, conocer barrios nuevos — pero el colectivo tarda, el Uber cuesta,
+      y las apps de monopatín son frías, sin soporte, con equipos de dudosa calidad.
+    </p>
+    <div class="problema-grid">
+      <div class="problema-card">
+        <div class="problema-icon">🚌</div>
+        <h3>El colectivo te saca del viaje</h3>
+        <p>Querés explorar a tu ritmo, no parado en una parada esperando el 34.</p>
+      </div>
+      <div class="problema-card">
+        <div class="problema-icon">📱</div>
+        <h3>Las apps son todo menos personales</h3>
+        <p>Pantallita, tarjeta, monopatín clavado en la vereda. Sin orientación, sin ruta, sin nadie que te explique nada.</p>
+      </div>
+      <div class="problema-card">
+        <div class="problema-icon">🤷</div>
+        <h3>¿Por dónde empezar?</h3>
+        <p>Palermo, el Rosedal, Puerto Madero — ¿todo eso en un día? Necesitás una ruta, no un mapa que no entiende Buenos Aires.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ EXPERIENCIA ═══════════════════════════════ -->
+<section id="experiencia">
+  <div class="container">
+    <span class="label">La experiencia completa</span>
+    <div class="grid-2">
+      <div>
+        <h2>
+          No es solo el monopatín.<br>
+          <span class="serif-italic highlight" style="font-size:0.82em; line-height:1.3; display:block; margin-top:0.2em;">Es la experiencia.</span>
+        </h2>
+        <p style="margin-top:1.2rem; margin-bottom:2rem; max-width:400px;">
+          Los que nos eligen no hablan del hardware. Hablan de cómo se sintieron. "Más que alquilar,
+          es una experiencia completa" — eso nos dicen una y otra vez. Por algo tiene sentido.
+        </p>
+        <a href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Quiero%20info%20sobre%20el%20alquiler%20de%20monopatín" class="btn btn-primary" target="_blank" rel="noopener">
+          Quiero esta experiencia →
+        </a>
+      </div>
+      <div class="exp-grid">
+        <div class="exp-card">
+          <div class="exp-icon">🗺️</div>
+          <div class="exp-text">
+            <h3>Mapa interactivo</h3>
+            <p>Rutas curadas con los mejores puntos, paradas, y spots para fotos en Palermo y alrededores.</p>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">💬</div>
+          <div class="exp-text">
+            <h3>Soporte en ruta</h3>
+            <p>Si algo pasa durante el recorrido, tenés a alguien real del otro lado del teléfono. No un chatbot.</p>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">⛑️</div>
+          <div class="exp-text">
+            <h3>Casco incluido</h3>
+            <p>Salís equipado desde el minuto uno. Sin extras ocultos. Sin "ah, el casco es aparte".</p>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">📍</div>
+          <div class="exp-text">
+            <h3>Showroom en Palermo</h3>
+            <p>Sinclair 3139. Retirás, te explicamos, y en 5 minutos estás en el Rosedal.</p>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">⚡</div>
+          <div class="exp-text">
+            <h3>Sin experiencia previa</h3>
+            <p>En 5 minutos de práctica ya vas solo con confianza. El 90% de nuestros clientes arrancó igual.</p>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon">🌿</div>
+          <div class="exp-text">
+            <h3>Ecológico y silencioso</h3>
+            <p>La ciudad desde otro ángulo — el que no te da ningún vehículo a motor.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STORE STRIP ─── -->
+<div class="store-strip">
+  <img src="FlyFree_Design_System/assets/store.jpg" alt="Showroom Fly Free Urban Palermo" />
+  <div class="store-strip-overlay">
+    <div class="store-strip-label">Nuestro showroom</div>
+    <div class="store-strip-text">Sinclair 3139 5°C · Palermo, CABA</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ RECORRIDOS ═══════════════════════════════ -->
+<section id="recorridos">
+  <div class="container">
+    <span class="label">Tours en monopatín por Buenos Aires</span>
+    <h2>
+      3 recorridos que
+      <span class="serif-italic highlight" style="font-size:0.85em; display:inline; text-transform:none; letter-spacing:0.01em;"> no se olvidan.</span>
+    </h2>
+    <p style="max-width:520px; margin-top:1rem; margin-bottom:3rem;">
+      Tenemos rutas curadas para cada tiempo y cada ganas. Click en cada ruta en el mapa para ver detalles.
+    </p>
+
+    <!-- Mapa interactivo -->
+    <div id="map-container"></div>
+
+    <p style="font-size:0.85rem; color:var(--text-tertiary); margin-top:2rem;">
+      💡 Tip: Hacé zoom en el mapa, explorá los puntos de interés, y descubrí spots que tal vez no conocías.
+    </p>
+
+    <div class="grid-3" style="margin-top:3rem;">
+
+      <div class="route-card">
+        <div class="route-badge">Favorita local</div>
+        <h3 class="route-title">El Circuito Rosedal</h3>
+        <p style="font-size:0.82rem;">Showroom → Av. del Libertador → Rosedal → Lagos de Palermo. El recorrido clásico para estrenar ruedas.</p>
+        <div class="route-meta">
+          <div class="route-meta-item"><span>Duración</span><span>1–2 hs</span></div>
+          <div class="route-meta-item"><span>Distancia</span><span>~8 km</span></div>
+          <div class="route-meta-item"><span>Nivel</span><span>Principiante</span></div>
+        </div>
+        <ul class="route-highlights">
+          <li>Rosedal de Palermo</li>
+          <li>Lagos artificiales</li>
+          <li>Pistas de skate y patinaje</li>
+          <li>Zona de food trucks</li>
+        </ul>
+      </div>
+
+      <div class="route-card">
+        <div class="route-badge">Impresionante para turistas</div>
+        <h3 class="route-title">Puerto Madero y Recoleta</h3>
+        <p style="font-size:0.82rem;">La ruta icónica de Buenos Aires. Del Río hasta la Recoleta — con los mejores paisajes urbanos de la ciudad.</p>
+        <div class="route-meta">
+          <div class="route-meta-item"><span>Duración</span><span>2–3 hs</span></div>
+          <div class="route-meta-item"><span>Distancia</span><span>~18 km</span></div>
+          <div class="route-meta-item"><span>Nivel</span><span>Intermedio</span></div>
+        </div>
+        <ul class="route-highlights">
+          <li>Puerto Madero</li>
+          <li>Puente de la Mujer</li>
+          <li>Cementerio de la Recoleta</li>
+          <li>Alvear Avenue</li>
+        </ul>
+      </div>
+
+      <div class="route-card">
+        <div class="route-badge">Para el día completo</div>
+        <h3 class="route-title">Gran Tour Buenos Aires</h3>
+        <p style="font-size:0.82rem;">Palermo, Recoleta, Puerto Madero y San Telmo. La ciudad completa en un solo día, a tu ritmo.</p>
+        <div class="route-meta">
+          <div class="route-meta-item"><span>Duración</span><span>5–6 hs</span></div>
+          <div class="route-meta-item"><span>Distancia</span><span>~35 km</span></div>
+          <div class="route-meta-item"><span>Nivel</span><span>Pro</span></div>
+        </div>
+        <ul class="route-highlights">
+          <li>Todos los barrios icónicos</li>
+          <li>San Telmo + feria dominical</li>
+          <li>Costanera Sur</li>
+          <li>La Boca (exterior)</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ MODELOS ═══════════════════════════════ -->
+<section id="modelos">
+  <div class="container">
+    <span class="label">Elegí tu modelo</span>
+    <h2>
+      ¿Cuánto tiempo tenés?
+      <span class="serif-italic highlight" style="font-size:0.82em; display:block; text-transform:none; margin-top:0.15em; letter-spacing:0.01em;">Elegí tu plan.</span>
+    </h2>
+    <p style="max-width:520px; margin-top:1rem;">
+      Dos modelos según tu recorrido y experiencia. Ambos incluyen casco, mapa y soporte por WhatsApp.
+    </p>
+
+    <div class="models-grid">
+
+      <!-- BASIC -->
+      <div class="model-card">
+        <div class="model-name">Modelo Basic</div>
+        <div class="model-price">$25.000</div>
+        <div class="model-period">por 1 hora</div>
+        <p class="model-desc">
+          Ideal para el Circuito Rosedal o un primer contacto con la ciudad sobre ruedas.
+          Sin experiencia previa. En 5 minutos ya vas solo.
+        </p>
+        <div class="model-specs">
+          <div class="spec"><span class="spec-label">Velocidad máx.</span><span class="spec-value">20 km/h</span></div>
+          <div class="spec"><span class="spec-label">Autonomía</span><span class="spec-value">~20 km</span></div>
+          <div class="spec"><span class="spec-label">Duración</span><span class="spec-value">1 hora</span></div>
+          <div class="spec"><span class="spec-label">Ideal para</span><span class="spec-value">Rosedal</span></div>
+        </div>
+        <ul class="model-features">
+          <li>Casco incluido</li>
+          <li>Mapa interactivo de rutas</li>
+          <li>Soporte WhatsApp en ruta</li>
+          <li>Asistencia en caso de necesitar ayuda</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Quiero%20reservar%20el%20Modelo%20Basic%20de%20monopatín" class="btn btn-outline" target="_blank" rel="noopener" style="width:100%; text-align:center; display:block;">
+          Reservar Basic →
+        </a>
+      </div>
+
+      <!-- PRO -->
+      <div class="model-card featured">
+        <div class="model-name">Modelo Pro</div>
+        <div class="model-price">$65.000</div>
+        <div class="model-period">día completo</div>
+        <p class="model-desc">
+          Para el Gran Tour. Mayor velocidad, mayor autonomía y mayor amortiguación para los baches de Buenos Aires.
+          El monopatín que te aguanta todo el día.
+        </p>
+        <div class="model-specs">
+          <div class="spec"><span class="spec-label">Velocidad máx.</span><span class="spec-value">30 km/h</span></div>
+          <div class="spec"><span class="spec-label">Autonomía</span><span class="spec-value">~40 km</span></div>
+          <div class="spec"><span class="spec-label">Duración</span><span class="spec-value">Día completo</span></div>
+          <div class="spec"><span class="spec-label">Ideal para</span><span class="spec-value">Gran Tour</span></div>
+        </div>
+        <ul class="model-features">
+          <li>Casco + cargador incluidos</li>
+          <li>Mapa interactivo con rutas sugeridas</li>
+          <li>Soporte WhatsApp prioritario en ruta</li>
+          <li>Asistencia gratuita si la necesitás</li>
+          <li>Mayor amortiguación para calles porteñas</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Quiero%20reservar%20el%20Modelo%20Pro%20de%20monopatín%20para%20el%20día%20completo" class="btn btn-primary" target="_blank" rel="noopener" style="width:100%; text-align:center; display:block;">
+          Reservar Pro →
+        </a>
+      </div>
+
+    </div>
+
+    <div class="note-box">
+      💡 ¿Empresa, grupo o evento corporativo? <strong>Consultanos por WhatsApp</strong> — tenemos precios especiales para grupos y fines de semana.
+      <br><br>
+      📋 <strong>Requisitos:</strong> DNI físico o Pasaporte · Servicio a tu nombre · Mayor de 18 años.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CALCULADORA ═══════════════════════════════ -->
+<style>
+#calculadora { background: var(--bg-dark); }
+.calc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.calc-step-label {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 1rem;
+}
+.calc-model-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.calc-model-btn {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-body);
+  cursor: pointer;
+  transition: var(--t-base);
+  text-align: left;
+}
+.calc-model-btn:hover { border-color: var(--border-strong); }
+.calc-model-btn.active {
+  border-color: var(--yellow);
+  background: rgba(245,200,0,0.06);
+  color: var(--white);
+}
+.model-btn-name {
+  font-family: var(--font);
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--white);
+}
+.model-btn-sub {
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+.calc-dur-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.calc-dur-btn {
+  padding: 0.55rem 1.1rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-body);
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: var(--t-base);
+  white-space: nowrap;
+}
+.calc-dur-btn:hover { border-color: var(--border-strong); color: var(--white); }
+.calc-dur-btn.active {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--bg-dark);
+}
+.calc-qty-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.calc-qty-btn {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--t-base);
+  font-family: var(--font);
+  user-select: none;
+}
+.calc-qty-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+.calc-qty-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.calc-qty-btn:disabled:hover { border-color: var(--border); color: var(--white); }
+.calc-qty-num {
+  font-family: var(--font-cond);
+  font-weight: 900;
+  font-size: 2.2rem;
+  color: var(--white);
+  min-width: 2.5rem;
+  text-align: center;
+  line-height: 1;
+}
+.calc-qty-label {
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+.calc-result-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.calc-result-label {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+.calc-price-display {
+  font-family: var(--font-cond);
+  font-weight: 900;
+  font-size: clamp(3rem, 6vw, 4.2rem);
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  transition: color 0.15s ease;
+}
+.calc-pay-method {
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  margin-top: 0.4rem;
+}
+.calc-cash-note {
+  margin-top: 0.85rem;
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: var(--electric);
+  letter-spacing: 0.02em;
+}
+.calc-cash-note strong { font-weight: 700; }
+.calc-result-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+.calc-disclaimer {
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.03em;
+  text-align: right;
+  margin: 0;
+  line-height: 1.6;
+}
+@media (max-width: 640px) {
+  .calc-card { padding: 1.5rem; gap: 2rem; }
+  .calc-result-wrap { flex-direction: column; align-items: flex-start; }
+  .calc-result-right { align-items: flex-start; width: 100%; }
+  .calc-result-right .btn { width: 100%; text-align: center; display: block; }
+  .calc-disclaimer { text-align: left; }
+}
+</style>
+
+<section id="calculadora">
+  <div class="container">
+    <span class="label">Calculá tu alquiler</span>
+    <h2>
+      Elegí tu combo.
+      <span class="serif-italic highlight" style="font-size:0.82em; display:block; text-transform:none; margin-top:0.15em; letter-spacing:0.01em;">El precio, al instante.</span>
+    </h2>
+    <p style="max-width:520px; margin-top:1rem;">
+      Seleccioná modelo, tiempo y cantidad — y calculamos el total en el momento.
+    </p>
+
+    <div class="calc-card">
+
+      <!-- 01 Modelo -->
+      <div class="calc-step">
+        <div class="calc-step-label">01 — Elegí el modelo</div>
+        <div class="calc-model-btns" role="group" aria-label="Modelo de monopatín">
+          <button class="calc-model-btn active" data-model="basico">
+            <span class="model-btn-name">Basic</span>
+            <span class="model-btn-sub">hasta 20 km/h · autonomía ~20 km</span>
+          </button>
+          <button class="calc-model-btn" data-model="pro">
+            <span class="model-btn-name">Pro ✦</span>
+            <span class="model-btn-sub">hasta 30 km/h · autonomía ~40 km</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 02 Duración -->
+      <div class="calc-step">
+        <div class="calc-step-label">02 — ¿Cuánto tiempo?</div>
+        <div class="calc-dur-btns" role="group" aria-label="Duración del alquiler">
+          <button class="calc-dur-btn active" data-dur="1h">1 hora</button>
+          <button class="calc-dur-btn" data-dur="2h">2 horas</button>
+          <button class="calc-dur-btn" data-dur="dia">Por día</button>
+          <button class="calc-dur-btn" data-dur="finde">Por finde</button>
+          <button class="calc-dur-btn" data-dur="semana">Por semana</button>
+        </div>
+      </div>
+
+      <!-- 03 Cantidad -->
+      <div class="calc-step">
+        <div class="calc-step-label">03 — ¿Cuántos monopatines?</div>
+        <div class="calc-qty-wrap">
+          <button class="calc-qty-btn" id="calc-minus" aria-label="Menos">−</button>
+          <span id="calc-qty-num" class="calc-qty-num">1</span>
+          <button class="calc-qty-btn" id="calc-plus" aria-label="Más">+</button>
+          <span class="calc-qty-label">monopatín(es)</span>
+        </div>
+      </div>
+
+      <!-- Resultado -->
+      <div class="calc-result-wrap">
+        <div class="calc-result-left">
+          <div class="calc-result-label">Total estimado</div>
+          <div class="calc-price-display" id="calc-price">$20.000</div>
+          <div class="calc-pay-method">por transferencia bancaria</div>
+          <div class="calc-cash-note" id="calc-cash-note" style="display:none;">
+            Mejor precio en efectivo: <strong id="calc-cash-price"></strong>
+          </div>
+        </div>
+        <div class="calc-result-right">
+          <a id="calc-wa-btn"
+             href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Quiero%20reservar%201%20monopatín%20Basic%20por%201%20hora."
+             class="btn btn-primary" target="_blank" rel="noopener">
+            Reservar por WhatsApp →
+          </a>
+          <p class="calc-disclaimer">Precios en pesos argentinos.<br>Sujeto a disponibilidad.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var PRICES = {
+    basico: {
+      eco:  { '1h':20000, '2h':35000, 'dia':60000, 'finde':130000, 'semana':250000 },
+      cash: null
+    },
+    pro: {
+      eco:  { '1h':35000, '2h':50000, 'dia':80000, 'finde':170000, 'semana':350000 },
+      cash: { '1h':25000, '2h':40000, 'dia':70000, 'finde':150000, 'semana':300000 }
+    }
+  };
+  var DUR_LABELS = {
+    '1h':'1 hora', '2h':'2 horas',
+    'dia':'el día completo',
+    'finde':'el fin de semana (viernes a domingo)',
+    'semana':'la semana completa (7 días)'
+  };
+
+  var model = 'basico', dur = '1h', qty = 1;
+
+  var priceEl    = document.getElementById('calc-price');
+  var cashNoteEl = document.getElementById('calc-cash-note');
+  var cashPriceEl= document.getElementById('calc-cash-price');
+  var qtyNumEl   = document.getElementById('calc-qty-num');
+  var minusBtn   = document.getElementById('calc-minus');
+  var plusBtn    = document.getElementById('calc-plus');
+  var waBtn      = document.getElementById('calc-wa-btn');
+
+  function fmt(n) {
+    return '$' + n.toLocaleString('es-AR');
+  }
+
+  function update() {
+    var ecoUnit  = PRICES[model].eco[dur];
+    var ecoTotal = ecoUnit * qty;
+    var cashData = PRICES[model].cash;
+    var cashTotal = cashData ? cashData[dur] * qty : null;
+
+    priceEl.textContent = fmt(ecoTotal);
+
+    if (cashTotal && model === 'pro') {
+      cashNoteEl.style.display = 'block';
+      cashPriceEl.textContent  = fmt(cashTotal);
+    } else {
+      cashNoteEl.style.display = 'none';
+    }
+
+    minusBtn.disabled = (qty <= 1);
+    plusBtn.disabled  = (qty >= 5);
+    qtyNumEl.textContent = qty;
+
+    var modelLabel = model === 'pro' ? 'Pro' : 'Basic';
+    var plural = qty > 1 ? 'es' : '';
+    var msg = encodeURIComponent(
+      'Hola! Quiero reservar ' + qty + ' monopatín' + plural +
+      ' ' + modelLabel + ' por ' + DUR_LABELS[dur] + '. ¿Tienen disponibilidad?'
+    );
+    waBtn.href = 'https://api.whatsapp.com/send?phone=5491151097151&text=' + msg;
+  }
+
+  document.querySelectorAll('.calc-model-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.calc-model-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      model = btn.dataset.model;
+      update();
+    });
+  });
+
+  document.querySelectorAll('.calc-dur-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.calc-dur-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      dur = btn.dataset.dur;
+      update();
+    });
+  });
+
+  minusBtn.addEventListener('click', function() { if (qty > 1) { qty--; update(); } });
+  plusBtn.addEventListener('click',  function() { if (qty < 5) { qty++; update(); } });
+
+  update();
+})();
+</script>
+
+<!-- ═══════════════════════════════ BOOKING ═══════════════════════════════ -->
+<section id="booking">
+  <div class="container">
+    <span class="label">Reserva tu experiencia</span>
+    <h2>
+      Elegí fecha y hora.<br>
+      <span class="serif-italic highlight" style="font-size:0.82em; display:block; text-transform:none; margin-top:0.15em; letter-spacing:0.01em;">Confirmamos al instante.</span>
+    </h2>
+
+    <div class="booking-container">
+      <div class="booking-left">
+        <h3>Próximas disponibilidades</h3>
+        <input type="text" id="calendar" class="flatpickr-input" placeholder="Selecciona una fecha" readonly />
+      </div>
+      <div class="booking-right">
+        <div id="time-slots-container" style="display:none;">
+          <h3>Selecciona horario</h3>
+          <div class="time-slot-group" id="time-slots"></div>
+        </div>
+        <div class="booking-summary" id="booking-summary" style="display:none;">
+          <h4>Resumen de reserva</h4>
+          <div class="summary-item">
+            <span>Fecha</span>
+            <span id="summary-date">-</span>
+          </div>
+          <div class="summary-item">
+            <span>Horario</span>
+            <span id="summary-time">-</span>
+          </div>
+          <div class="summary-item">
+            <span>Modelo</span>
+            <span id="summary-model">Pro</span>
+          </div>
+          <div class="summary-item">
+            <span>Duración</span>
+            <span id="summary-duration">-</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-total">
+            <span>Total</span>
+            <span id="summary-price">$65.000</span>
+          </div>
+          <a href="#" id="confirm-booking" class="btn btn-primary" target="_blank" rel="noopener">
+            Confirmar por WhatsApp →
+          </a>
+          <div class="booking-message">
+            Te enviaremos confirmación y detalles de retiro al instante
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ TESTIMONIOS ═══════════════════════════════ -->
+<section id="testimonios">
+  <div class="container">
+    <span class="label">Nuestros clientes cuentan</span>
+    <h2>
+      No lo decimos nosotros.<br>
+      <span class="serif-italic highlight" style="font-size:0.82em; display:block; text-transform:none; margin-top:0.15em; letter-spacing:0.01em;">Lo dicen ellos.</span>
+    </h2>
+
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">
+          Como turistas, siempre buscamos formas únicas de experimentar una ciudad. Alquilar los monopatines con FlyFree en Buenos Aires fue una elección brillante. Desde Puerto Madero hasta Recoleta, cada rincón se convirtió en una aventura. El equipo nos dio un servicio amable y atento. ¡Una experiencia inolvidable!
+        </p>
+        <div class="test-name">Elena &amp; Marco</div>
+        <div class="test-origin">Roma, Italia 🇮🇹</div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">
+          Alquilar un monopatín eléctrico con FlyFree para recorrer Recoleta fue una experiencia maravillosa. Pude descubrir los encantos del barrio de una manera ecológica. La atención al cliente fue excepcional, y el kit de seguridad incluido me hizo sentir completamente tranquila. ¡Ya reservé para el próximo finde!
+        </p>
+        <div class="test-name">Valentina G.</div>
+        <div class="test-origin">Buenos Aires, Argentina 🇦🇷</div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">
+          Decidimos probar algo diferente y alquilamos monopatines eléctricos con Flyfree. ¡Fue la mejor decisión! Exploramos los barrios de una manera divertida y ecológica. La atención fue excepcional y la tarifa para extranjeros muy atractiva. ¡Recomendamos FlyFree a todos los visitantes!
+        </p>
+        <div class="test-name">Liam &amp; Emma</div>
+        <div class="test-origin">London, UK 🇬🇧</div>
+      </div>
+    </div>
+
+    <div class="proof-bar">
+      <div class="proof-item">
+        <span class="proof-number">4.9⭐</span>
+        <span class="proof-label">Rating en Google Maps</span>
+      </div>
+      <div class="proof-item">
+        <span class="proof-number">500+</span>
+        <span class="proof-label">Alquileres realizados</span>
+      </div>
+      <div class="proof-item">
+        <span class="proof-number">3 países</span>
+        <span class="proof-label">Clientes internacionales</span>
+      </div>
+      <div class="proof-item">
+        <span class="proof-number">2 cuadras</span>
+        <span class="proof-label">Del Rosedal de Palermo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ GALERÍA ═══════════════════════════════ -->
+<section id="galeria">
+  <div class="container">
+    <span class="label">Explorá a través de nuestros ojos</span>
+    <h2>La ciudad en movimiento.<br>
+      <span class="serif-italic highlight" style="font-size:0.82em; display:block; text-transform:none; margin-top:0.15em; letter-spacing:0.01em;">Cada rincón es una aventura.</span>
+    </h2>
+
+    <div class="gallery-grid" id="gallery">
+      <div class="gallery-item" data-image="https://images.unsplash.com/photo-1625948515291-79613d1e4fb0?w=600&h=600&fit=crop" data-title="Rosedal Clásico">
+        <img src="https://images.unsplash.com/photo-1625948515291-79613d1e4fb0?w=600&h=600&fit=crop" alt="Monopatín en el Rosedal" loading="lazy" />
+        <div class="gallery-overlay">
+          <div class="gallery-title">Rosedal Clásico</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-image="https://images.unsplash.com/photo-1616499283076-a01a6f239b9d?w=600&h=600&fit=crop" data-title="Puerto Madero">
+        <img src="https://images.unsplash.com/photo-1616499283076-a01a6f239b9d?w=600&h=600&fit=crop" alt="Monopatín en Puerto Madero" loading="lazy" />
+        <div class="gallery-overlay">
+          <div class="gallery-title">Puerto Madero</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-image="https://images.unsplash.com/photo-1502933691298-84fc14542831?w=600&h=600&fit=crop" data-title="Equipos Profesionales">
+        <img src="https://images.unsplash.com/photo-1502933691298-84fc14542831?w=600&h=600&fit=crop" alt="Monopatines profesionales" loading="lazy" />
+        <div class="gallery-overlay">
+          <div class="gallery-title">Equipos Premium</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-image="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=600&fit=crop" data-title="Seguridad Garantizada">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=600&fit=crop" alt="Seguridad en monopatín" loading="lazy" />
+        <div class="gallery-overlay">
+          <div class="gallery-title">Seguridad Garantizada</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-image="https://images.unsplash.com/photo-1535925456559-85e51b991925?w=600&h=600&fit=crop" data-title="Recoleta">
+        <img src="https://images.unsplash.com/photo-1535925456559-85e51b991925?w=600&h=600&fit=crop" alt="Monopatín en Recoleta" loading="lazy" />
+        <div class="gallery-overlay">
+          <div class="gallery-title">Recoleta</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-image="https://images.unsplash.com/photo-1516280440614-37f3d7b72898?w=600&h=600&fit=crop" data-title="Entrenamiento">
+        <img src="https://images.unsplash.com/photo-1516280440614-37f3d7b72898?w=600&h=600&fit=crop" alt="Entrenamiento con monopatín" loading="lazy" />
+        <div class="gallery-overlay">
+          <div class="gallery-title">Entrenamiento</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-image="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=600&fit=crop" data-title="Soporte en Ruta">
+        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=600&fit=crop" alt="Soporte de Fly Free Urban" loading="lazy" />
+        <div class="gallery-overlay">
+          <div class="gallery-title">Soporte en Ruta</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-image="https://images.unsplash.com/photo-1617763767537-b5b37e11b31e?w=600&h=600&fit=crop" data-title="Showroom Palermo">
+        <img src="https://images.unsplash.com/photo-1617763767537-b5b37e11b31e?w=600&h=600&fit=crop" alt="Showroom de Fly Free Urban en Palermo" loading="lazy" />
+        <div class="gallery-overlay">
+          <div class="gallery-title">Showroom Palermo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox-modal">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="prevImage()">❮</button>
+  <button class="lightbox-nav lightbox-next" onclick="nextImage()">❯</button>
+  <div class="lightbox-content">
+    <img id="lightbox-image" class="lightbox-image" src="" alt="" />
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ OBJECIONES ═══════════════════════════════ -->
+<section id="objeciones">
+  <div class="container">
+    <span class="label">Lo que te preguntás antes de reservar</span>
+    <h2>Tus dudas.<br>
+      <span class="serif-italic highlight" style="font-size:0.82em; display:block; text-transform:none; margin-top:0.15em; letter-spacing:0.01em;">Nuestras respuestas.</span>
+    </h2>
+
+    <div class="obj-list">
+      <div class="obj-item">
+        <div class="obj-question">Nunca usé un monopatín eléctrico — ¿es difícil?</div>
+        <div class="obj-answer">En el momento del retiro, te mostramos cómo funciona. En 5 minutos de práctica en la vereda ya vas con confianza. El 90% de nuestros clientes nunca había usado uno antes. Nadie se fue sin saber manejarlo.</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-question">¿Es seguro en las calles de Buenos Aires?</div>
+        <div class="obj-answer">Incluimos casco en todos los alquileres y te recomendamos las rutas más seguras — ciclovías y calles de bajo tráfico. El mapa que te damos ya tiene las rutas más seguras marcadas. Si algo pasa, tenés soporte directo por WhatsApp.</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-question">¿Y si me pasa algo o lo rompo?</div>
+        <div class="obj-answer">Firmás un contrato transparente antes de salir donde se especifica todo. Ante cualquier incidente durante el recorrido, tenés soporte inmediato por WhatsApp. Los detalles de cobertura se te explican antes de retirar — sin letra chica.</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-question">¿Por qué Fly Free y no una app?</div>
+        <div class="obj-answer">Porque las apps te dan un monopatín tirado en la vereda y chau. Nosotros somos personas reales con showroom físico en Palermo. Te explicamos las rutas, te damos soporte en ruta, y si algo falla, tenés a alguien que atiende. No somos un algoritmo — somos tu punto de partida para conocer Buenos Aires.</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-question">¿Cuál modelo me conviene?</div>
+        <div class="obj-answer">Si nunca usaste uno o querés el Circuito Rosedal: el <strong>Basic (1 hora, $25.000)</strong> es perfecto. Si tenés el día libre y querés recorrer varios barrios: el <strong>Pro (día completo, $65.000)</strong> te da la autonomía y velocidad para el Gran Tour.</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-question">¿Puedo alquilar en grupo o por más tiempo?</div>
+        <div class="obj-answer">Sí. Consultanos por WhatsApp para alquileres por fin de semana, semana, y grupos o eventos corporativos. Tenemos precios especiales para esos casos — no están publicados porque los armamos a medida.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ BRIDGE ═══════════════════════════════ -->
+<section id="bridge">
+  <div class="container">
+    <div class="bridge-grid">
+      <div>
+        <span class="label" style="color:rgba(12,12,12,0.45);">¿Te enganchaste?</span>
+        <h2 style="color:#0C0C0C; letter-spacing:-0.02em;">El monopatín fue<br>el primer paso.</h2>
+        <p style="color:#383838; font-weight:400; margin-top:1rem; margin-bottom:2rem; max-width:380px;">
+          Muchos de nuestros mejores clientes empezaron igual — un día de monopatín por Palermo
+          y ya no podían parar de rodar. Si querés seguir explorando la ciudad sobre ruedas,
+          tenemos el ecosistema completo para que avances.
+        </p>
+        <p style="color:rgba(12,12,12,0.45); font-size:0.82rem; font-weight:400;">
+          <strong style="color:#0C0C0C;">¿Y si no es para vos?</strong> Perfecto. Devolvés el monopatín y listo.
+          Sin presiones, sin fidelización forzada. Pero si querés más — estamos acá.
+        </p>
+      </div>
+      <div class="bridge-cards">
+        <a href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Me%20interesa%20el%20alquiler%20de%20rollers%20para%20probar%20antes%20de%20comprar" class="bridge-card" target="_blank" rel="noopener">
+          <div>
+            <span class="bridge-card-label">Próximo paso sugerido</span>
+            <span class="bridge-card-title">🛼 Alquiler de rollers — Probá antes de comprar</span>
+          </div>
+          <span class="bridge-arrow">→</span>
+        </a>
+        <a href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Me%20interesa%20comprar%20un%20monopatín%20eléctrico" class="bridge-card" target="_blank" rel="noopener">
+          <div>
+            <span class="bridge-card-label">Si te enamoraste del monopatín</span>
+            <span class="bridge-card-title">⚡ Comprá tu propio monopatín eléctrico</span>
+          </div>
+          <span class="bridge-arrow">→</span>
+        </a>
+        <a href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Me%20interesa%20unirme%20a%20la%20comunidad%20de%20patinaje" class="bridge-card" target="_blank" rel="noopener">
+          <div>
+            <span class="bridge-card-label">Si querés comunidad</span>
+            <span class="bridge-card-title">🏘️ Comunidad NM Roller — Salidas grupales</span>
+          </div>
+          <span class="bridge-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FAQ ═══════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <span class="label">Preguntas frecuentes</span>
+    <h2>Todo lo que necesitás saber
+      <span class="serif-italic highlight" style="font-size:0.82em; display:block; text-transform:none; margin-top:0.15em; letter-spacing:0.01em;">antes de salir.</span>
+    </h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Cómo funciona el proceso de alquiler?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          Simple: agendás tu retiro por WhatsApp o llamada. Venís a nuestro showroom en Sinclair 3139, Palermo.
+          Firmás el contrato (2 minutos), abonás el servicio, dejás tu DNI físico o Pasaporte, y en 5 minutos
+          estás en el Rosedal sobre ruedas.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Dónde retiro y entrego el monopatín?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          Retiro y entrega en nuestro showroom: <strong>Sinclair 3139 5°C, Palermo, CABA</strong>.
+          A 2 cuadras del Rosedal. Horario de atención: 09 a 18 hs.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Qué documentos necesito?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          DNI físico argentino o Pasaporte (lo retenemos durante el alquiler y te lo devolvemos al volver)
+          + un servicio a tu nombre. Ser mayor de 18 años.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Tengo tiempo de tolerancia para devolver?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          Tenés 10 minutos de tolerancia pasada la hora acordada. Luego se aplica un cargo adicional proporcional.
+          Te lo aclaramos en el contrato para que no haya sorpresas.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Puedo alquilar para un evento corporativo o grupo?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          Sí. Trabajamos con grupos, equipos y eventos corporativos. Contactanos por WhatsApp
+          para cotizarte a medida según la cantidad de monopatines y el tiempo que necesitás.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Por cuánto tiempo puedo alquilar?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          El mínimo es 1 hora. También podés alquilar por día completo, fin de semana o semana.
+          Los precios de cada modalidad se consultan directamente por WhatsApp — los armamos según tu necesidad.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Qué formas de pago aceptan?
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          Efectivo, transferencia bancaria y tarjeta (consultanos las cuotas disponibles al momento del alquiler).
+          También aceptamos USD para turistas extranjeros.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CTA FINAL ═══════════════════════════════ -->
+<section id="cta-final">
+  <div class="cta-bg-img">
+    <img src="FlyFree_Design_System/assets/lifestyle-scooter-3.jpg" alt="" aria-hidden="true" />
+  </div>
+  <div class="container">
+    <div class="cta-final-content">
+      <span class="label">¿Qué esperás?</span>
+      <h2 style="margin-bottom:0.5rem;">
+        El Rosedal está a <span class="highlight">2 cuadras</span>.
+      </h2>
+      <p class="serif-italic" style="font-size:1.3rem; color:var(--text-secondary); margin: 0 auto 2.4rem; max-width:480px; text-align:center;">
+        La ciudad entera, a un alquiler de distancia.
+      </p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Quiero%20reservar%20un%20monopatín%20eléctrico%20en%20Palermo.%20¿Tienen%20disponibilidad%3F" class="btn btn-primary" target="_blank" rel="noopener" style="font-size:0.9rem; padding:1.2rem 2.8rem;">
+          Reservar por WhatsApp →
+        </a>
+        <a href="tel:+5491151097151" class="btn btn-outline" style="font-size:0.9rem; padding:1.2rem 2rem;">
+          📞 Llamarnos
+        </a>
+      </div>
+      <p class="cta-note">Sinclair 3139 5°C, Palermo · 09 a 18 hs · WhatsApp: 11 5109-7151</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <a href="#">
+      <div class="footer-logo-bg">
+        <img src="FlyFree_Design_System/assets/logo.png" alt="Fly Free Urban" />
+      </div>
+    </a>
+    <div class="footer-links">
+      <a href="#experiencia">La experiencia</a>
+      <a href="#recorridos">Recorridos</a>
+      <a href="#modelos">Precios</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://api.whatsapp.com/send?phone=5491151097151" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <span class="footer-copy">© 2026 Fly Free Urban · Palermo, CABA</span>
+  </div>
+</footer>
+
+<!-- ─── WHATSAPP FLOAT ─── -->
+<a href="https://api.whatsapp.com/send?phone=5491151097151&text=Hola!%20Quiero%20reservar%20un%20monopatín%20eléctrico"
+   class="wa-float" target="_blank" rel="noopener" title="Chatear por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // FAQ Toggle
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Intersection Observer for animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.exp-card, .route-card, .model-card, .test-card, .obj-item, .bridge-card, .problema-card, .gallery-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // Galería & Lightbox
+  let currentImageIndex = 0;
+  const galleryItems = Array.from(document.querySelectorAll('#gallery .gallery-item'));
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      currentImageIndex = index;
+      openLightbox(index);
+    });
+  });
+
+  function openLightbox(index) {
+    const item = galleryItems[index];
+    const image = item.dataset.image;
+    const title = item.dataset.title;
+    lightboxImage.src = image;
+    lightboxImage.alt = title;
+    lightboxCaption.textContent = title;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = 'auto';
+  }
+
+  function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+    const item = galleryItems[currentImageIndex];
+    const image = item.dataset.image;
+    const title = item.dataset.title;
+    lightboxImage.src = image;
+    lightboxImage.alt = title;
+    lightboxCaption.textContent = title;
+  }
+
+  function prevImage() {
+    currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+    const item = galleryItems[currentImageIndex];
+    const image = item.dataset.image;
+    const title = item.dataset.title;
+    lightboxImage.src = image;
+    lightboxImage.alt = title;
+    lightboxCaption.textContent = title;
+  }
+
+  // Keyboard navigation for lightbox
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Close lightbox when clicking outside image
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // ═══ MAPA INTERACTIVO ═══
+  const mapContainer = document.getElementById('map-container');
+  if (mapContainer) {
+    const map = L.map('map').setView([-34.569, -58.427], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19,
+      tileSize: 256,
+      style: 'mapbox://styles/mapbox/dark-v11'
+    }).addTo(map);
+
+    // Custom icon color
+    const createIcon = (color) => L.divIcon({
+      className: 'custom-icon',
+      html: `<div style="background: ${color}; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center;">
+        <span style="color: white; font-weight: bold; font-size: 12px;">📍</span>
+      </div>`,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12],
+      popupAnchor: [0, -12]
+    });
+
+    // Routes data
+    const routes = [
+      {
+        id: 'rosedal',
+        name: 'El Circuito Rosedal',
+        duration: '1–2 hs',
+        distance: '~8 km',
+        difficulty: 'Principiante',
+        color: '#F5C800',
+        start: [-34.56, -58.425],
+        startName: 'Showroom (Sinclair 3139)',
+        pois: [
+          {lat: -34.563, lng: -58.423, name: 'Rosedal'},
+          {lat: -34.568, lng: -58.428, name: 'Lagos de Palermo'},
+          {lat: -34.571, lng: -58.432, name: 'Zona Food Trucks'}
+        ]
+      },
+      {
+        id: 'puerto-madero',
+        name: 'Puerto Madero y Recoleta',
+        duration: '2–3 hs',
+        distance: '~18 km',
+        difficulty: 'Intermedio',
+        color: '#C8FF00',
+        start: [-34.597, -58.363],
+        startName: 'Puerto Madero',
+        pois: [
+          {lat: -34.6, lng: -58.365, name: 'Puente de la Mujer'},
+          {lat: -34.594, lng: -58.383, name: 'Recoleta'},
+          {lat: -34.587, lng: -58.391, name: 'Alvear Avenue'}
+        ]
+      },
+      {
+        id: 'gran-tour',
+        name: 'Gran Tour Buenos Aires',
+        duration: '5–6 hs',
+        distance: '~35 km',
+        difficulty: 'Pro',
+        color: '#FF6B6B',
+        start: [-34.56, -58.425],
+        startName: 'Showroom (Sinclair 3139)',
+        pois: [
+          {lat: -34.601, lng: -58.366, name: 'Puerto Madero'},
+          {lat: -34.594, lng: -58.383, name: 'Recoleta'},
+          {lat: -34.603, lng: -58.36, name: 'San Telmo'}
+        ]
+      }
+    ];
+
+    // Draw routes on map
+    routes.forEach(route => {
+      const startMarker = L.marker(route.start, {icon: createIcon(route.color)}).addTo(map);
+
+      const popupContent = `
+        <div class="route-marker-popup">
+          <h4>${route.name}</h4>
+          <p><strong>Punto de salida:</strong> ${route.startName}</p>
+          <div class="meta-item">
+            <div class="meta-label">Duración</div>
+            <div class="meta-value">${route.duration}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Distancia</div>
+            <div class="meta-value">${route.distance}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Nivel</div>
+            <div class="meta-value">${route.difficulty}</div>
+          </div>
+          <div style="margin-top:1rem;">
+            <a href="https://api.whatsapp.com/send?phone=5491151097151&text=Quiero%20reservar%20la%20ruta:%20${encodeURIComponent(route.name)}"
+               target="_blank" rel="noopener"
+               style="color: #F5C800; font-weight: 700; text-decoration: none; font-size: 0.85rem;">
+              Reservar esta ruta →
+            </a>
+          </div>
+        </div>
+      `;
+
+      startMarker.bindPopup(popupContent);
+
+      // Draw POI markers
+      route.pois.forEach(poi => {
+        const poiMarker = L.marker([poi.lat, poi.lng], {icon: createIcon(route.color)}).addTo(map);
+        poiMarker.bindPopup(`<strong>${poi.name}</strong>`);
+      });
+
+      // Draw polyline (simplified route)
+      const coords = [route.start, ...route.pois.map(p => [p.lat, p.lng])];
+      L.polyline(coords, {
+        color: route.color,
+        weight: 3,
+        opacity: 0.6,
+        dashArray: '5, 5'
+      }).addTo(map);
+    });
+
+    // Fit map to show all routes
+    map.fitBounds([[-34.62, -58.4], [-34.55, -58.3]], {padding: [50, 50]});
+  }
+
+  // ═══ CALENDARIO & BOOKING ═══
+  let selectedDate = null;
+  let selectedTime = null;
+  let selectedModel = 'Pro';
+  let selectedDuration = '2h';
+
+  // Availability data (hardcoded for demo, replace with API in future)
+  const AVAILABILITY = {
+    '2026-06-27': { '10:00': true, '14:00': true, '18:00': false },
+    '2026-06-28': { '10:00': true, '14:00': false, '18:00': true },
+    '2026-06-29': { '10:00': false, '14:00': true, '18:00': true },
+    '2026-06-30': { '10:00': true, '14:00': true, '18:00': true },
+    '2026-07-01': { '10:00': true, '14:00': true, '18:00': false },
+    '2026-07-02': { '10:00': false, '14:00': true, '18:00': true },
+    '2026-07-03': { '10:00': true, '14:00': true, '18:00': true },
+  };
+
+  const TIME_SLOTS = ['10:00', '14:00', '18:00'];
+  const PRICES = { Basic: 25000, Pro: 65000 };
+
+  const calendarElement = document.getElementById('calendar');
+  if (calendarElement) {
+    flatpickr(calendarElement, {
+      mode: 'single',
+      minDate: 'today',
+      disable: [
+        function(date) {
+          const dateStr = date.toISOString().split('T')[0];
+          return !AVAILABILITY[dateStr];
+        }
+      ],
+      onChange: function(selectedDates) {
+        if (selectedDates.length > 0) {
+          selectedDate = selectedDates[0];
+          showTimeSlots(selectedDate);
+        }
+      }
+    });
+  }
+
+  function showTimeSlots(date) {
+    const dateStr = date.toISOString().split('T')[0];
+    const availableSlots = AVAILABILITY[dateStr] || {};
+
+    const timeSlotsContainer = document.getElementById('time-slots-container');
+    const slotsHtml = document.getElementById('time-slots');
+
+    slotsHtml.innerHTML = '';
+
+    TIME_SLOTS.forEach(time => {
+      const isAvailable = availableSlots[time];
+      const btn = document.createElement('button');
+      btn.className = `time-slot ${isAvailable ? '' : 'disabled'}`;
+      btn.textContent = time;
+      btn.disabled = !isAvailable;
+
+      if (isAvailable) {
+        btn.addEventListener('click', () => selectTimeSlot(btn, time));
+      }
+
+      slotsHtml.appendChild(btn);
+    });
+
+    timeSlotsContainer.style.display = 'block';
+  }
+
+  function selectTimeSlot(btn, time) {
+    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedTime = time;
+    updateBookingSummary();
+  }
+
+  function updateBookingSummary() {
+    if (selectedDate && selectedTime) {
+      const dateStr = selectedDate.toLocaleDateString('es-AR', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'});
+      const price = PRICES[selectedModel];
+
+      document.getElementById('summary-date').textContent = dateStr;
+      document.getElementById('summary-time').textContent = selectedTime;
+      document.getElementById('summary-duration').textContent = selectedDuration;
+      document.getElementById('summary-price').textContent = `$${price.toLocaleString('es-AR')}`;
+
+      const bookingSummary = document.getElementById('booking-summary');
+      bookingSummary.style.display = 'block';
+
+      // Build WhatsApp message
+      const message = `Hola! Quiero reservar para el ${dateStr} a las ${selectedTime}. Modelo ${selectedModel}, ${selectedDuration} de duración. Total: $${price}`;
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=5491151097151&text=${encodeURIComponent(message)}`;
+      document.getElementById('confirm-booking').href = whatsappUrl;
+    }
+  }
+</script>
+
+</body>
+</html>

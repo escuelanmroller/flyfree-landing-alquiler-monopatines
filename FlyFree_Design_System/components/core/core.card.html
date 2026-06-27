@@ -1,0 +1,127 @@
+<!-- @dsCard group="Components" viewport="700x660" name="Core Components" subtitle="Button · Badge · Card · Input · NavBar — all variants" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0C0C0C; }
+    .sec { padding: 14px 20px; border-bottom: 1px solid #181818; }
+    .lbl { font-family: 'Futura Std', sans-serif; font-size: 9px; font-weight: 700; color: #383838;
+           text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 11px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { Button, Badge, Card, Input, NavBar } = window.FlyFreeUrbanDesignSystem_3c4997 || {};
+
+    function Demo() {
+      const ArrowIcon = () => <span style={{fontSize:'1.1em'}}>→</span>;
+      return (
+        <div>
+
+          {/* ── Button ──────────────────────────────────── */}
+          <div className="sec">
+            <div className="lbl">Button</div>
+            <div style={{display:'flex',gap:'8px',flexWrap:'wrap',marginBottom:'8px'}}>
+              <Button variant="primary"  size="md">Primary</Button>
+              <Button variant="secondary" size="md">Secondary</Button>
+              <Button variant="ghost"    size="md">Ghost</Button>
+              <Button variant="dark"     size="md">Dark</Button>
+              <Button variant="electric" size="md">Electric</Button>
+              <Button variant="primary"  size="md" disabled>Disabled</Button>
+            </div>
+            <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
+              <Button variant="primary" size="sm">SM</Button>
+              <Button variant="primary" size="md">MD</Button>
+              <Button variant="primary" size="lg">LG</Button>
+              <Button variant="primary" size="xl">XL</Button>
+              <Button variant="secondary" size="md" rightIcon={<ArrowIcon/>}>Ver Más</Button>
+              <Button variant="primary" size="md" leftIcon={<ArrowIcon/>}>Agregar</Button>
+            </div>
+          </div>
+
+          {/* ── Badge ───────────────────────────────────── */}
+          <div className="sec">
+            <div className="lbl">Badge</div>
+            <div style={{display:'flex',gap:'7px',flexWrap:'wrap'}}>
+              <Badge variant="default">Default</Badge>
+              <Badge variant="yellow">Nuevo</Badge>
+              <Badge variant="electric">Oferta</Badge>
+              <Badge variant="outline">Outline</Badge>
+              <Badge variant="accent">Accent</Badge>
+              <Badge variant="error"   dot>Agotado</Badge>
+              <Badge variant="success" dot>En Stock</Badge>
+              <Badge variant="dark">Dark</Badge>
+              <Badge variant="yellow" size="sm">SM</Badge>
+              <Badge variant="yellow" size="lg">LG</Badge>
+            </div>
+          </div>
+
+          {/* ── Card ────────────────────────────────────── */}
+          <div className="sec">
+            <div className="lbl">Card</div>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'10px'}}>
+              <Card
+                variant="product"
+                title="RS600"
+                subtitle="Patines inline velocidad"
+                tag="Inline"
+                priceFormatted="$3,290 MXN"
+                badge={<Badge variant="yellow" size="sm">Nuevo</Badge>}
+                image="../../assets/store.jpg"
+              />
+              <Card
+                variant="feature"
+                title="Envío Gratis"
+                description="En compras mayores a $1,500 MXN a todo México."
+                icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>}
+              />
+              <Card
+                variant="category"
+                title="Inline"
+                subtitle="12 modelos"
+                tag="Categoría"
+                image="../../assets/store.jpg"
+              />
+            </div>
+          </div>
+
+          {/* ── Input ───────────────────────────────────── */}
+          <div className="sec">
+            <div className="lbl">Input</div>
+            <div style={{display:'flex',gap:'12px',flexWrap:'wrap'}}>
+              <Input placeholder="Buscar productos..." size="md" />
+              <Input label="Email" type="email" placeholder="tu@email.com" size="md" />
+              <Input label="Error" placeholder="Campo requerido" error="Campo obligatorio." size="md" />
+            </div>
+          </div>
+
+          {/* ── NavBar ──────────────────────────────────── */}
+          <div style={{borderTop:'1px solid #181818'}}>
+            <div className="lbl" style={{padding:'12px 20px 0'}}>NavBar</div>
+            <NavBar
+              logoSrc="../../assets/logo.png"
+              links={[
+                {label:'Patines',href:'#'},{label:'Scooters',href:'#'},
+                {label:'Cascos',href:'#'},{label:'Accesorios',href:'#'},
+              ]}
+              ctaLabel="Mi Cuenta"
+              sticky={false}
+            />
+          </div>
+
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+  </script>
+</body>
+</html>

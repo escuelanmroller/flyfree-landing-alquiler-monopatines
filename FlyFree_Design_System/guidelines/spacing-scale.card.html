@@ -1,0 +1,39 @@
+<!-- @dsCard group="Spacing" viewport="700x150" name="Spacing Scale" subtitle="4px base grid — --space-1 through --space-16" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--color-neutral-950); font-family: var(--font-display); padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .track { display: flex; align-items: center; gap: 16px; }
+    .steps { display: flex; align-items: flex-end; gap: 8px; }
+    .step { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .bar { background: var(--color-brand-yellow); width: 16px; border-radius: 1px; }
+    .lbl { font-size: 8px; font-weight: 700; color: #525252; text-transform: uppercase; letter-spacing: 0.06em; }
+  </style>
+</head>
+<body>
+  <div class="track">
+    <div class="steps">
+      <div class="step"><div class="bar" style="height:4px;"></div><span class="lbl">1</span></div>
+      <div class="step"><div class="bar" style="height:8px;"></div><span class="lbl">2</span></div>
+      <div class="step"><div class="bar" style="height:12px;"></div><span class="lbl">3</span></div>
+      <div class="step"><div class="bar" style="height:16px;"></div><span class="lbl">4</span></div>
+      <div class="step"><div class="bar" style="height:20px;"></div><span class="lbl">5</span></div>
+      <div class="step"><div class="bar" style="height:24px;"></div><span class="lbl">6</span></div>
+      <div class="step"><div class="bar" style="height:32px;"></div><span class="lbl">8</span></div>
+      <div class="step"><div class="bar" style="height:40px;"></div><span class="lbl">10</span></div>
+      <div class="step"><div class="bar" style="height:48px;"></div><span class="lbl">12</span></div>
+      <div class="step"><div class="bar" style="height:64px;"></div><span class="lbl">16</span></div>
+      <div class="step"><div class="bar" style="height:80px;"></div><span class="lbl">20</span></div>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:6px; padding-left:16px; border-left:1px solid #252525;">
+      <span style="font-size:10px; font-weight:700; color:#fff; text-transform:uppercase; letter-spacing:0.1em;">4px Grid</span>
+      <span style="font-size:11px; font-weight:300; color:#525252;">--space-1 (4px) → --space-64 (256px)</span>
+      <span style="font-size:10px; font-weight:300; color:#383838;">All spacing values are strict multiples of 4px.</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!-- @dsCard group="Colors" viewport="700x160" name="Brand Colors" subtitle="Primary brand palette — yellow, black, white" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--color-neutral-900); font-family: var(--font-display); }
+    .wrap { display: flex; height: 160px; }
+    .swatch { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px 16px; }
+    .label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 3px; }
+    .hex { font-size: 12px; font-weight: 300; opacity: 0.7; letter-spacing: 0.04em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="swatch" style="background:#F5C800; flex:1.3;">
+      <span class="label" style="color:#0C0C0C;">Brand Yellow</span>
+      <span class="hex" style="color:#0C0C0C;">#F5C800 — --color-brand-yellow</span>
+    </div>
+    <div class="swatch" style="background:#0C0C0C; border:1px solid #252525;">
+      <span class="label" style="color:#fff;">Brand Black</span>
+      <span class="hex" style="color:#737373;">#0C0C0C — --color-brand-black</span>
+    </div>
+    <div class="swatch" style="background:#FFFFFF;">
+      <span class="label" style="color:#0C0C0C;">Brand White</span>
+      <span class="hex" style="color:#525252;">#FFFFFF — --color-brand-white</span>
+    </div>
+    <div class="swatch" style="background:#F4F3EE;">
+      <span class="label" style="color:#0C0C0C;">Off-White</span>
+      <span class="hex" style="color:#525252;">#F4F3EE — --color-brand-offwhite</span>
+    </div>
+  </div>
+</body>
+</html>

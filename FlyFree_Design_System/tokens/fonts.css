@@ -1,0 +1,75 @@
+/* ─── Futura Std — Regular Width ─────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Futura Std';
+  src: url('../assets/fonts/FuturaStd-Book.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src: url('../assets/fonts/FuturaStd-Medium.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src: url('../assets/fonts/FuturaStd-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src: url('../assets/fonts/FuturaStd-ExtraBold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std';
+  src: url('../assets/fonts/FuturaStd-Heavy.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Futura Std — Condensed Width ───────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Futura Std Cond';
+  src: url('../assets/fonts/FuturaStd-CondensedLight.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std Cond';
+  src: url('../assets/fonts/FuturaStd-Condensed.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std Cond';
+  src: url('../assets/fonts/FuturaStd-CondensedBold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura Std Cond';
+  src: url('../assets/fonts/FuturaStd-CondensedExtraBd.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}

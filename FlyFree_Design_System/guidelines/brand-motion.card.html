@@ -1,0 +1,51 @@
+<!-- @dsCard group="Brand" viewport="700x150" name="Motion & Transitions" subtitle="Easing curves and timing tokens" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--color-neutral-950); font-family: var(--font-display); padding: 20px 28px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .cell { background: var(--color-neutral-900); padding: 14px 16px; border: 1px solid #252525; cursor: pointer; }
+    .cell .bar { height: 3px; background: var(--color-brand-yellow); width: 0%; transition: width 0.3s ease; margin-bottom: 10px; }
+    .cell:hover .bar-fast   { width: 100%; transition-duration: 0.1s; }
+    .cell:hover .bar-base   { width: 100%; transition-duration: 0.18s; }
+    .cell:hover .bar-slow   { width: 100%; transition-duration: 0.35s; }
+    .cell:hover .bar-spring { width: 100%; transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.34,1.56,0.64,1); }
+    .name { font-size: 11px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; }
+    .val  { font-size: 10px; font-weight: 300; color: #525252; margin-top: 4px; }
+    .tok  { font-size: 9px;  font-weight: 300; color: #383838; margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="cell">
+      <div class="bar bar-fast"></div>
+      <div class="name">Fast</div>
+      <div class="val">100ms · ease</div>
+      <div class="tok">--transition-fast</div>
+    </div>
+    <div class="cell">
+      <div class="bar bar-base"></div>
+      <div class="name">Base</div>
+      <div class="val">180ms · ease</div>
+      <div class="tok">--transition-base</div>
+    </div>
+    <div class="cell">
+      <div class="bar bar-slow"></div>
+      <div class="name">Slow</div>
+      <div class="val">350ms · cubic</div>
+      <div class="tok">--transition-slow</div>
+    </div>
+    <div class="cell">
+      <div class="bar bar-spring" style="background:#C8FF00;"></div>
+      <div class="name">Spring</div>
+      <div class="val">400ms · bounce</div>
+      <div class="tok">--transition-spring</div>
+    </div>
+  </div>
+  <p style="margin-top:12px; font-size:10px; font-weight:300; color:#383838;">Hover each cell to preview the easing curve.</p>
+</body>
+</html>

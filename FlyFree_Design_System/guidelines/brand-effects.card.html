@@ -1,0 +1,45 @@
+<!-- @dsCard group="Brand" viewport="700x170" name="Shadows & Glow" subtitle="Elevation system and brand glow effects" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--color-neutral-950); font-family: var(--font-display); padding: 20px 28px; }
+    .row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .card { width: 80px; height: 56px; background: var(--color-surface-card); border: 1px solid #252525; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 8px; }
+    .lbl { font-size: 8px; font-weight: 700; color: #525252; text-transform: uppercase; letter-spacing: 0.08em; text-align: center; margin-top: 10px; }
+    .tok { font-size: 7px; font-weight: 300; color: #383838; }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div class="card" style="box-shadow:0 1px 4px rgba(0,0,0,0.5);"></div>
+      <span class="lbl">SM</span><span class="tok">--shadow-sm</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div class="card" style="box-shadow:0 4px 16px rgba(0,0,0,0.6);"></div>
+      <span class="lbl">MD</span><span class="tok">--shadow-md</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div class="card" style="box-shadow:0 8px 32px rgba(0,0,0,0.7);"></div>
+      <span class="lbl">LG</span><span class="tok">--shadow-lg</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div class="card" style="box-shadow:0 16px 64px rgba(0,0,0,0.8);"></div>
+      <span class="lbl">XL</span><span class="tok">--shadow-xl</span>
+    </div>
+    <div style="width:1px;height:80px;background:#252525;margin:0 8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div class="card" style="background:#F5C800;box-shadow:0 0 28px rgba(245,200,0,0.35);border-color:transparent;"></div>
+      <span class="lbl">Yellow Glow</span><span class="tok">--shadow-glow-yellow</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div class="card" style="background:#C8FF00;box-shadow:0 0 28px rgba(200,255,0,0.35);border-color:transparent;"></div>
+      <span class="lbl">Electric Glow</span><span class="tok">--shadow-glow-electric</span>
+    </div>
+  </div>
+</body>
+</html>

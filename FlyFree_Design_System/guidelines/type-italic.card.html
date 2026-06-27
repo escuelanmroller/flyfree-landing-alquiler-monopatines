@@ -1,0 +1,41 @@
+<!-- @dsCard group="Type" viewport="700x300" name="Italic — Contraste Editorial" subtitle="Playfair Display italic · Futura oblique · Pairings and usage" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--color-neutral-950); padding: 28px 32px; display: flex; flex-direction: column; gap: 0; }
+    .divider { height: 1px; background: #1C1C1C; margin: 20px 0; }
+    .tag { font-family: var(--font-display); font-size: 9px; font-weight: 700; color: #383838; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+
+  <!-- 1: Serif italic + Futura Heavy — editorial contrast (Nike-style) -->
+  <div class="tag">Contraste Editorial — Futura Heavy + Playfair Italic</div>
+  <div style="display:flex; align-items:baseline; gap:14px; line-height:1;">
+    <span style="font-family:var(--font-display); font-weight:900; font-size:58px; color:#FFFFFF; text-transform:uppercase; letter-spacing:-0.02em;">MUÉVETE</span>
+    <span style="font-family:'Playfair Display',Georgia,serif; font-style:italic; font-weight:400; font-size:42px; color:#F5C800; letter-spacing:0.01em;">libre.</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2: Futura Condensed synthetic italic — aggressive sports oblique -->
+  <div class="tag">Oblique Deportivo — Futura Condensed ExtraBold + font-style: italic</div>
+  <div style="display:flex; align-items:baseline; gap:12px; line-height:1;">
+    <span style="font-family:var(--font-condensed); font-weight:900; font-style:italic; font-size:72px; color:#F5C800; text-transform:uppercase; letter-spacing:-0.01em;">RS600</span>
+    <span style="font-family:var(--font-condensed); font-weight:900; font-style:italic; font-size:40px; color:#FFFFFF; text-transform:uppercase; letter-spacing:-0.01em; opacity:0.4;">INLINE SKATES</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3: Playfair italic body — editorial pull quote -->
+  <div class="tag">Cita Editorial — Playfair Display Italic</div>
+  <p style="font-family:'Playfair Display',Georgia,serif; font-style:italic; font-weight:400; font-size:18px; color:#737373; line-height:1.65; max-width:520px;">
+    "El pavimento es tuyo. Patines y equipo urbano de alto rendimiento para quienes definen su propio camino."
+  </p>
+
+</body>
+</html>

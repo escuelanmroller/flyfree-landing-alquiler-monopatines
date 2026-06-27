@@ -1,0 +1,27 @@
+<!-- @dsCard group="Spacing" viewport="700x150" name="Layout System" subtitle="Container widths, padding, section rhythm" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--color-neutral-950); font-family: var(--font-display); padding: 20px 24px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .cell { background: var(--color-neutral-900); padding: 14px 16px; border: 1px solid #252525; }
+    .key { font-size: 10px; font-weight: 700; color: #F5C800; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+    .val { font-size: 13px; font-weight: 900; color: #fff; }
+    .sub { font-size: 9px; font-weight: 300; color: #525252; margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="cell"><div class="key">Container XL</div><div class="val">1280px</div><div class="sub">--container-xl · Desktop max</div></div>
+    <div class="cell"><div class="key">Container 2XL</div><div class="val">1440px</div><div class="sub">--container-2xl · Wide screens</div></div>
+    <div class="cell"><div class="key">Fluid Padding</div><div class="val">clamp(1–5rem)</div><div class="sub">--container-padding · Responsive gutter</div></div>
+    <div class="cell"><div class="key">Section SM</div><div class="val">4rem / 64px</div><div class="sub">--section-gap-sm · Tight</div></div>
+    <div class="cell"><div class="key">Section MD</div><div class="val">7rem / 112px</div><div class="sub">--section-gap-md · Standard</div></div>
+    <div class="cell"><div class="key">Section LG</div><div class="val">10rem / 160px</div><div class="sub">--section-gap-lg · Airy</div></div>
+  </div>
+</body>
+</html>

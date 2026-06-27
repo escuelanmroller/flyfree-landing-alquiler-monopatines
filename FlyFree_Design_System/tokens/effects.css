@@ -1,0 +1,44 @@
+:root {
+
+  /* ─── Border Radius ─────────────────────────────────────────────────────── */
+  /* FlyFree Urban defaults to ZERO radius on primary UI elements (buttons,
+     cards, badges). Rounded corners are used only for avatars and small
+     utility elements like tags. */
+  --radius-none:  0px;
+  --radius-sm:    2px;
+  --radius-md:    4px;
+  --radius-lg:    8px;
+  --radius-xl:    12px;
+  --radius-full:  9999px;
+
+  /* ─── Shadows ────────────────────────────────────────────────────────────── */
+  --shadow-sm:           0 1px 4px rgba(0,0,0,0.5);
+  --shadow-md:           0 4px 16px rgba(0,0,0,0.6);
+  --shadow-lg:           0 8px 32px rgba(0,0,0,0.7);
+  --shadow-xl:           0 16px 64px rgba(0,0,0,0.8);
+  --shadow-glow-yellow:  0 0 28px rgba(245,200,0,0.35);
+  --shadow-glow-electric:0 0 28px rgba(200,255,0,0.35);
+  --shadow-inset:        inset 0 1px 4px rgba(0,0,0,0.5);
+
+  /* ─── Borders ────────────────────────────────────────────────────────────── */
+  --border-thin:  1px;
+  --border-base:  2px;
+  --border-thick: 3px;
+
+  /* ─── Transitions ────────────────────────────────────────────────────────── */
+  --transition-fast:   all 0.1s ease;                              /* @kind other */
+  --transition-base:   all 0.18s ease;                             /* @kind other */
+  --transition-slow:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);    /* @kind other */
+  --transition-spring: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* @kind other */
+
+  /* ─── Blur ───────────────────────────────────────────────────────────────── */
+  --blur-sm:  blur(4px);   /* @kind other */
+  --blur-md:  blur(12px);  /* @kind other */
+  --blur-lg:  blur(24px);  /* @kind other */
+
+  /* ─── Image Treatments ───────────────────────────────────────────────────── */
+  --filter-dark-hero:   grayscale(20%) brightness(0.6) contrast(1.1); /* @kind other */
+  --filter-product:     grayscale(15%) brightness(0.95);              /* @kind other */
+  --overlay-hero:       linear-gradient(to right, rgba(12,12,12,0.9) 40%, rgba(12,12,12,0.2) 100%); /* @kind other */
+  --overlay-card:       linear-gradient(to top, rgba(12,12,12,0.92) 0%, transparent 60%);  /* @kind other */
+}
