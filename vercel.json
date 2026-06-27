@@ -1,6 +1,6 @@
 {
+  "framework": null,
   "outputDirectory": ".",
-  "public": false,
   "rewrites": [
     { "source": "/", "destination": "/index.html" }
   ]
