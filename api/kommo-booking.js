@@ -74,6 +74,15 @@ export default async function handler(req, res) {
     const contactId = complexData._embedded?.contacts?.[0]?.id;
     console.log('Lead creado:', leadId, '| Contacto creado:', contactId);
 
+    // Agregar nota separada — _embedded.notes en /leads/complex no funciona en Kommo
+    if (leadId) {
+      await fetch(`${base}/leads/${leadId}/notes`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify([{ note_type: 'common', params: { text: noteText } }])
+      });
+    }
+
     return res.status(200).json({ success: true, message: 'Reserva enviada a Kommo', lead_id: leadId });
 
   } catch (err) {
