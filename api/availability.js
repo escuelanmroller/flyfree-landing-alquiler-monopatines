@@ -28,12 +28,14 @@ export default async function handler(req, res) {
     const eventType = etData.collection.find(e => e.scheduling_url.includes('alquiler-venta'));
     if (!eventType) return res.status(404).json({ error: 'Event type not found' });
 
-    // 3. Get available times — Calendly limit: 7 days per call, start must be future
-    // Make 2 calls to cover 14 days
-    const now = new Date();
-    const week1Start = now.toISOString();
-    const week1End = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString();
-    const week2End = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString();
+    // 3. Get available times — Calendly limit: 7 days per call, start must be tomorrow+
+    // Use tomorrow midnight UTC to avoid "start_time must be in the future" rejection
+    const tomorrow = new Date();
+    tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+    tomorrow.setUTCHours(0, 0, 0, 0);
+    const week1Start = tomorrow.toISOString();
+    const week1End = new Date(tomorrow.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString();
+    const week2End = new Date(tomorrow.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString();
 
     const [avRes1, avRes2] = await Promise.all([
       fetch(`https://api.calendly.com/event_type_available_times?event_type=${encodeURIComponent(eventType.uri)}&start_time=${encodeURIComponent(week1Start)}&end_time=${encodeURIComponent(week1End)}`, { headers }),
