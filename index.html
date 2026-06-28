@@ -2466,25 +2466,25 @@
               CONFIRMAR RESERVA →
             </button>
 
-            <!-- Pantalla de confirmación (oculta hasta submit) -->
-            <div id="booking-success" style="display:none; margin-top:1.5em;">
-              <div class="booking-confirmation">
-                <div class="confirmation-icon">✅</div>
-                <h3 class="confirmation-title">¡Reserva recibida!</h3>
-                <p class="confirmation-subtitle">Tu solicitud ya está en nuestro sistema. Completá la confirmación por WhatsApp para asegurar el turno.</p>
-                <div class="confirmation-details" id="confirmation-details"></div>
-                <p class="confirmation-cta-text">Tu mensaje ya viene pre-llenado con los datos de tu reserva:</p>
-                <a id="whatsapp-confirm-btn" href="#" target="_blank" rel="noopener" class="btn-whatsapp-confirm">
-                  💬 Confirmar por WhatsApp
-                </a>
-                <p class="confirmation-hint">Se abre WhatsApp con todo completado — solo tocás Enviar</p>
-              </div>
-            </div>
-
             <div class="booking-message">
               Te enviaremos confirmación y detalles de retiro al instante
             </div>
           </form>
+
+          <!-- Pantalla de confirmación (fuera del form para que no se oculte con él) -->
+          <div id="booking-success" style="display:none; margin-top:1.5em;">
+            <div class="booking-confirmation">
+              <div class="confirmation-icon">✅</div>
+              <h3 class="confirmation-title">¡Reserva recibida!</h3>
+              <p class="confirmation-subtitle">Tu solicitud ya está en nuestro sistema. Completá la confirmación por WhatsApp para asegurar el turno.</p>
+              <div class="confirmation-details" id="confirmation-details"></div>
+              <p class="confirmation-cta-text">Tu mensaje ya viene pre-llenado con los datos de tu reserva:</p>
+              <a id="whatsapp-confirm-btn" href="#" target="_blank" rel="noopener" class="btn-whatsapp-confirm">
+                💬 Confirmar por WhatsApp
+              </a>
+              <p class="confirmation-hint">Se abre WhatsApp con todo completado — solo tocás Enviar</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
