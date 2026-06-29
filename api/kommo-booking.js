@@ -70,9 +70,11 @@ export default async function handler(req, res) {
       });
     }
 
-    const leadId = complexData._embedded?.leads?.[0]?.id;
-    const contactId = complexData._embedded?.contacts?.[0]?.id;
+    // /leads/complex devuelve un array — leer el primer elemento
+    const leadId = complexData[0]?.id;
+    const contactId = complexData[0]?._embedded?.contacts?.[0]?.id;
     console.log('Lead creado:', leadId, '| Contacto creado:', contactId);
+    console.log('Kommo response completo:', JSON.stringify(complexData));
 
     // Agregar nota separada — _embedded.notes en /leads/complex no funciona en Kommo
     if (leadId) {
