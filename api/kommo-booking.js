@@ -1,3 +1,11 @@
+function formatPhone(phone) {
+  const digits = String(phone).replace(/\D/g, '');
+  if (digits.startsWith('549')) return digits;
+  if (digits.startsWith('54'))  return '549' + digits.slice(2);
+  if (digits.startsWith('0'))   return '549' + digits.slice(1);
+  return '549' + digits;
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -45,7 +53,7 @@ export default async function handler(req, res) {
             name: nombre,
             custom_fields_values: [
               { field_code: 'EMAIL', values: [{ value: email, enum_code: 'WORK' }] },
-              { field_code: 'PHONE', values: [{ value: telefono, enum_code: 'WORK' }] }
+              { field_code: 'PHONE', values: [{ value: formatPhone(telefono), enum_code: 'WORK' }] }
             ]
           }],
           notes: [{
@@ -76,13 +84,42 @@ export default async function handler(req, res) {
     console.log('Lead creado:', leadId, '| Contacto creado:', contactId);
     console.log('Kommo response completo:', JSON.stringify(complexData));
 
-    // Agregar nota separada — _embedded.notes en /leads/complex no funciona en Kommo
     if (leadId) {
+      // Agregar nota separada — _embedded.notes en /leads/complex no funciona en Kommo
       await fetch(`${base}/leads/${leadId}/notes`, {
         method: 'POST',
         headers,
         body: JSON.stringify([{ note_type: 'common', params: { text: noteText } }])
       });
+
+      // Obtener usuario responsable y crear tarea vinculada al lead
+      try {
+        const usersRes = await fetch(`${base}/users?limit=1`, { headers });
+        const usersData = await usersRes.json();
+        const responsibleUserId = usersData?._embedded?.users?.[0]?.id;
+
+        if (responsibleUserId) {
+          const taskText = `🛴 NUEVA RESERVA: ${nombre} — ${fecha} ${horario} (${modelo || 'monopatín'} × ${cantidad || 1})`;
+          const completeTimestamp = Math.floor(Date.now() / 1000) + 7200; // 2 horas
+          const taskRes = await fetch(`${base}/tasks`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify([{
+              text: taskText,
+              complete_till: completeTimestamp,
+              task_type_id: 1,
+              entity_id: leadId,
+              entity_type: 'leads',
+              responsible_user_id: responsibleUserId
+            }])
+          });
+          const taskData = await taskRes.json();
+          const taskId = taskData?._embedded?.tasks?.[0]?.id;
+          console.log('Tarea creada:', taskId, '| Responsable:', responsibleUserId);
+        }
+      } catch (taskErr) {
+        console.error('Error creando tarea (no crítico):', taskErr.message);
+      }
     }
 
     return res.status(200).json({ success: true, message: 'Reserva enviada a Kommo', lead_id: leadId });
