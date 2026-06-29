@@ -72,7 +72,7 @@ export default async function handler(req, res) {
 
     // /leads/complex devuelve un array — leer el primer elemento
     const leadId = complexData[0]?.id;
-    const contactId = complexData[0]?._embedded?.contacts?.[0]?.id;
+    const contactId = complexData[0]?.contact_id;
     console.log('Lead creado:', leadId, '| Contacto creado:', contactId);
     console.log('Kommo response completo:', JSON.stringify(complexData));
 
